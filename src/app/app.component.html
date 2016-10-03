@@ -1,3 +1,20 @@
-<h1>
-  {{title}}
-</h1>
+<md-sidenav-layout class="app-layout" fullscreen>
+  
+  <md-sidenav #sidenav mode="side" class="app-sidenav">
+    <md-list>
+      <md-list-item><a routerLink="/introduction" routerLinkActive="active">Introduction</a></md-list-item>
+      <md-list-item><a routerLink="/login" routerLinkActive="active">Login</a></md-list-item>
+      <md-list-item><a routerLink="/register" routerLinkActive="active">Register</a></md-list-item>
+    </md-list>
+  </md-sidenav>
+
+  <md-toolbar color="primary">
+    <button class="app-icon-button" (click)="sidenav.toggle()">
+      <i class="material-icons app-toolbar-menu">menu</i>
+    </button>
+    <span class="margin-left10"> {{title}} </span>
+  </md-toolbar>
+
+  <router-outlet></router-outlet>
+
+</md-sidenav-layout>
