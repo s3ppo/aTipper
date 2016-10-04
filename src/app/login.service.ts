@@ -13,7 +13,7 @@ export class LoginService {
   private LoginUrl = 'http://atipper.moniholz.at/accounts';
 
   // Get CarePerson
-  get(name: Object): Observable<LoginModel> {
+  get(name: Object): Observable<LoginModel> { 
     let auth = "Basic " + btoa(name['username'] + ":" + name['password']);
     let headers = new Headers({"Authorization": auth});
     let options = new RequestOptions({ headers: headers });
