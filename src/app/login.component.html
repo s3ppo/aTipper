@@ -1,23 +1,23 @@
 <div class="card-container">
-  <md-card class="login_card">
+  <md-card class="login_card"> 
     <md-card-subtitle>Login</md-card-subtitle>
     <md-card-content>
-      <form>
-        <md-input placeholder="Login">
+      <form (ngSubmit)="doLogin()" #LoginForm="ngForm">
+        <md-input placeholder="Login" [(ngModel)]="loginmodel.username" name="username">
             <span md-prefix>
               <i class="material-icons app-input-icon">account_circle</i>
               &nbsp;
             </span>
         </md-input>
         <br>
-        <md-input placeholder="Password">
+        <md-input placeholder="Password" [(ngModel)]="loginmodel.password" name="password">
           <span md-prefix>
             <i class="material-icons app-input-icon">https</i>
             &nbsp;
           </span>
         </md-input>
         <br>
-        <button md-raised-button color="primary" class="btn_login">Login</button>
+        <button md-raised-button color="primary" class="btn_login" type="submit">Login</button>
       </form>
     </md-card-content>
   </md-card>
