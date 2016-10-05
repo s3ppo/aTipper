@@ -7,12 +7,14 @@ import { MaterialModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login.component';
+import { DashboardComponent } from './dashboard.component';
 import { routing } from './app.routing';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,

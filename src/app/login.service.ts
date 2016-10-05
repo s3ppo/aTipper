@@ -20,7 +20,7 @@ export class LoginService {
 
     return this.http.get(this.LoginUrl, options)
                     .map((res:Response) => res.json())
-                    .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+                    .catch((error:any) => Observable.throw(error.json()._error.message || 'Server error'));
   }
 
   // Create a new CarePerson
@@ -30,7 +30,7 @@ export class LoginService {
 
     return this.http.post(this.LoginUrl, name, options)
                     .map((res:Response) => res.json())
-                    .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+                    .catch((error:any) => Observable.throw(error.json()._error.message || 'Server error'));
   }
 
 }

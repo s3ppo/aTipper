@@ -31,3 +31,7 @@
 .margin-left10 {
   margin-left: 10px;
 }
+
+md-sidenav {
+  width: 200px;
+}

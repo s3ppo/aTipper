@@ -18,6 +18,7 @@ export class LoginComponent {
   ){}
 
   loginmodel = new LoginModel('','');
+  error_msg = '';
 
   doLogin(): void {
     let commentOperation:Observable<LoginModel>;
@@ -28,7 +29,7 @@ export class LoginComponent {
                                 //this.router.navigate(['/careperson']);
                             }, 
                             err => {
-                                console.log(err);
+                                this.error_msg = err;
                             });
   }
 

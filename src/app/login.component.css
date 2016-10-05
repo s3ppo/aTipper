@@ -1,19 +1,21 @@
 .btn_login {
     margin-top: 20px;
+    margin-bottom: 20px;
 }
-
 .card-container {
   display: flex;
   flex-flow: row wrap;
 }
-
-.login_card {
-    width: 300px;
-    height: 200px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-top: -100px;
-    margin-left: -150px;
+.login_container {
     text-align: center;
+    width:100%;
+}
+.login_form {
+    height: auto;
+}
+.error_msg {
+    color: red;
+}
+md-card {
+    margin: 16px;
 }
