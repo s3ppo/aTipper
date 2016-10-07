@@ -1,14 +1,31 @@
 // Imports
 import { Injectable }     from '@angular/core';
+import { Router } from '@angular/router';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 
 import { Observable } from 'rxjs';
-import { LoginModel } from './model/login';
+import { LoginModel } from '../models/login';
 
 @Injectable()
-export class LoginService {
+export abstract class AuthService {
 
-  constructor (private http: Http) {}
+  static loggedIn: boolean = false;
+  static isAuthenticated(): boolean {
+    return AuthService.loggedIn;
+  }
+  //abstract logout(): any;
+
+  //abstract signinUser(myType: string, secret?: string): any;
+
+}
+
+@Injectable()
+export class LoginService extends AuthService {
+
+  constructor (private http: Http,private router: Router) {
+    super();
+    AuthService.loggedIn = !!localStorage.getItem('auth_token');
+  }
 
   private LoginUrl = 'http://atipper.moniholz.at/accounts';
 
@@ -19,7 +36,12 @@ export class LoginService {
     let options = new RequestOptions({ headers: headers });
 
     return this.http.get(this.LoginUrl, options)
-                    .map((res:Response) => res.json())
+                    .map((res:Response) => {
+                      if(res.status == 200){
+                        AuthService.loggedIn = true;
+                        this.router.navigate(['/dashboard']);
+                      }
+                    })
                     .catch((error:any) => Observable.throw(error.json()._error.message || 'Server error'));
   }
 
@@ -32,5 +54,10 @@ export class LoginService {
                     .map((res:Response) => res.json())
                     .catch((error:any) => Observable.throw(error.json()._error.message || 'Server error'));
   }
+
+  logout(): any {
+    AuthService.loggedIn = false;
+    this.router.navigate(['/login']);
+  };
 
 }

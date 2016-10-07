@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
 
 import { LoginService } from './login.service';
-import { LoginModel } from './model/login';
+import { LoginModel } from '../models/login';
 
 @Component({
   selector: 'Login',
@@ -14,7 +14,8 @@ import { LoginModel } from './model/login';
 export class LoginComponent {
 
   constructor(
-    private LoginService: LoginService
+    private LoginService: LoginService,
+    private router: Router
   ){}
 
   loginmodel = new LoginModel('','');
@@ -26,7 +27,6 @@ export class LoginComponent {
     commentOperation.subscribe(
                             carepersons => {
                                 this.loginmodel = new LoginModel('', '');
-                                //this.router.navigate(['/careperson']);
                             }, 
                             err => {
                                 this.error_msg = err;
