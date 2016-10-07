@@ -24,7 +24,6 @@ export class LoginService extends AuthService {
 
   constructor (private http: Http,private router: Router) {
     super();
-    AuthService.loggedIn = !!localStorage.getItem('auth_token');
   }
 
   private LoginUrl = 'http://atipper.moniholz.at/accounts';

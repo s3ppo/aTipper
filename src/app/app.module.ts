@@ -10,6 +10,7 @@ import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { routing } from './app.routing';
 import { AuthGuard } from './shared/auth.guard';
+import { LoginService } from './login/login.service';
 
 @NgModule({
   declarations: [
@@ -25,10 +26,11 @@ import { AuthGuard } from './shared/auth.guard';
     routing
   ],
   providers: [
+    LoginService,
     AuthGuard
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { 
+export class AppModule {
 
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LoginService } from './login/login.service';
+import { LoginService, AuthService } from './login/login.service';
 
 @Component({
   selector: 'app-root',
@@ -7,5 +7,23 @@ import { LoginService } from './login/login.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
+  constructor() {
+  }
+  
+  isLogged: boolean;
   title = 'aTipper';
+
+  isAuth() {
+    return AuthService.isAuthenticated();
+  }
+
+/*  ngOnInit(): void {
+    this.isLogged = AuthService.loggedIn;
+  }
+
+  ngOnChanges(): void {
+    this.isLogged = AuthService.loggedIn;
+  }*/
+
 }
