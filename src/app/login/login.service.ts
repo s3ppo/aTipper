@@ -29,7 +29,7 @@ export class LoginService extends AuthService {
 
   private LoginUrl = 'http://atipper.moniholz.at/accounts';
 
-  // Get CarePerson
+  // Get Login
   get(name: Object): Observable<LoginModel> { 
     let auth = "Basic " + btoa(name['username'] + ":" + name['password']);
     let headers = new Headers({"Authorization": auth});
