@@ -8,8 +8,9 @@ import { LoginService, AuthService } from './login/login.service';
 })
 export class AppComponent {
 
-  constructor() {
-  }
+  constructor(
+    private LoginService: LoginService
+  ) {}
   
   isLogged: boolean;
   title = 'aTipper';
@@ -18,12 +19,8 @@ export class AppComponent {
     return AuthService.isAuthenticated();
   }
 
-/*  ngOnInit(): void {
-    this.isLogged = AuthService.loggedIn;
+  logout() {
+    this.LoginService.logout();
   }
-
-  ngOnChanges(): void {
-    this.isLogged = AuthService.loggedIn;
-  }*/
 
 }

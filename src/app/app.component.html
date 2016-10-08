@@ -2,10 +2,10 @@
   
   <md-sidenav #sidenav mode="side" class="app-sidenav md-sidenav-over">
     <md-list>
-      <md-list-item><a routerLink="/introduction" routerLinkActive="active">Introduction</a></md-list-item>
+      <md-list-item *ngIf="!isAuth()"><a routerLink="/introduction" routerLinkActive="active">Einführung</a></md-list-item>
       <md-list-item *ngIf="!isAuth()"><a routerLink="/login" routerLinkActive="active">Login</a></md-list-item>
-      <md-list-item><a routerLink="/register" routerLinkActive="active">Register</a></md-list-item>
-      <md-list-item *ngIf="isAuth()"><a routerLink="/logout" routerLinkActive="active">Logout</a></md-list-item>
+      <md-list-item *ngIf="!isAuth()"><a routerLink="/register" routerLinkActive="active">Registrieren</a></md-list-item>
+      <md-list-item *ngIf="isAuth()"><a (click)="logout()">Logout</a></md-list-item>
     </md-list>
   </md-sidenav>
 

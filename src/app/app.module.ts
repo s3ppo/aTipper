@@ -8,6 +8,8 @@ import { MaterialModule } from '@angular/material';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { IntroComponent } from './intro/intro.component';
+import { RegisterComponent } from './register/register.component';
 import { routing } from './app.routing';
 import { AuthGuard } from './shared/auth.guard';
 import { LoginService } from './login/login.service';
@@ -17,6 +19,8 @@ import { LoginService } from './login/login.service';
     AppComponent,
     LoginComponent,
     DashboardComponent,
+    IntroComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
