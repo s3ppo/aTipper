@@ -10,12 +10,13 @@ import { LoginModel } from '../models/login';
 export abstract class AuthService {
 
   static loggedIn: boolean = false;
+  static auth: string;
   static isAuthenticated(): boolean {
     return AuthService.loggedIn;
   }
-  //abstract logout(): any;
-
-  //abstract signinUser(myType: string, secret?: string): any;
+  static getAuth(): string {
+    return AuthService.auth;
+  }
 
 }
 
@@ -26,7 +27,7 @@ export class LoginService extends AuthService {
     super();
   }
 
-  private LoginUrl = 'http://atipper.moniholz.at/accounts';
+  private LoginUrl = 'http://atipper.moniholz.at/';
 
   // Get Login
   get(name: Object): Observable<LoginModel> { 
@@ -38,19 +39,10 @@ export class LoginService extends AuthService {
                     .map((res:Response) => {
                       if(res.status == 200){
                         AuthService.loggedIn = true;
+                        AuthService.auth = auth;
                         this.router.navigate(['/dashboard']);
                       }
                     })
-                    .catch((error:any) => Observable.throw(error.json()._error.message || 'Server error'));
-  }
-
-  // Create a new CarePerson
-  create(name: Object): Observable<LoginModel> {
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
-
-    return this.http.post(this.LoginUrl, name, options)
-                    .map((res:Response) => res.json())
                     .catch((error:any) => Observable.throw(error.json()._error.message || 'Server error'));
   }
 

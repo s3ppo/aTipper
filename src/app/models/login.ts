@@ -1,4 +1,4 @@
-/* * * ./app/model/login.ts * * */
+/* * * ./app/models/login.ts * * */
 export class LoginModel {
     constructor(
         public username: string,

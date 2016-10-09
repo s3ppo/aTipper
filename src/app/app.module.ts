@@ -13,6 +13,7 @@ import { RegisterComponent } from './register/register.component';
 import { routing } from './app.routing';
 import { AuthGuard } from './shared/auth.guard';
 import { LoginService } from './login/login.service';
+import { AccountsService } from './services/accounts.service';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { LoginService } from './login/login.service';
   ],
   providers: [
     LoginService,
+    AccountsService,
     AuthGuard
   ],
   bootstrap: [AppComponent]
