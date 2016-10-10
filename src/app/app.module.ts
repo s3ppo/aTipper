@@ -10,8 +10,11 @@ import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { IntroComponent } from './intro/intro.component';
 import { RegisterComponent } from './register/register.component';
+import { TippComponent } from './tipp/tipp.component';
+import { AdminComponent } from './admin/admin.component';
 import { routing } from './app.routing';
 import { AuthGuard } from './shared/auth.guard';
+import { AuthAdminGuard } from './shared/authadmin.guard';
 import { LoginService } from './services/login.service';
 import { AccountsService } from './services/accounts.service';
 
@@ -22,6 +25,8 @@ import { AccountsService } from './services/accounts.service';
     DashboardComponent,
     IntroComponent,
     RegisterComponent,
+    TippComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,7 +38,8 @@ import { AccountsService } from './services/accounts.service';
   providers: [
     LoginService,
     AccountsService,
-    AuthGuard
+    AuthGuard,
+    AuthAdminGuard,
   ],
   bootstrap: [AppComponent]
 })

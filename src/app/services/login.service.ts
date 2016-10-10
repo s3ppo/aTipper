@@ -10,12 +10,16 @@ import { LoginModel } from '../models/login';
 export abstract class AuthService {
 
   static loggedIn: boolean = false;
+  static admin: boolean = false;
   static auth: string;
   static isAuthenticated(): boolean {
     return AuthService.loggedIn;
   }
   static getAuth(): string {
     return AuthService.auth;
+  }
+  static isAdmin(): boolean {
+    return AuthService.admin;
   }
 
 }
@@ -27,19 +31,23 @@ export class LoginService extends AuthService {
     super();
   }
 
-  private LoginUrl = 'http://atipper.moniholz.at/';
+  private LoginUrl = 'http://atipper.moniholz.at/accounts';
 
   // Get Login
-  get(name: Object): Observable<LoginModel> { 
+  get(name: Object): Observable<LoginModel> {
+    let loginurl = this.LoginUrl+'/'+name['username']+'/';
     let auth = "Basic " + btoa(name['username'] + ":" + name['password']);
     let headers = new Headers({"Authorization": auth});
     let options = new RequestOptions({ headers: headers });
 
-    return this.http.get(this.LoginUrl, options)
+    return this.http.get(loginurl, options)
                     .map((res:Response) => {
                       if(res.status == 200){
                         AuthService.loggedIn = true;
                         AuthService.auth = auth;
+                        if(res.json().admin) {
+                          AuthService.admin = res.json().admin;
+                        }
                         this.router.navigate(['/dashboard']);
                       }
                     })
@@ -48,6 +56,7 @@ export class LoginService extends AuthService {
 
   logout(): any {
     AuthService.loggedIn = false;
+    AuthService.admin = false;
     this.router.navigate(['/login']);
   };
 

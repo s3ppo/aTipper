@@ -19,6 +19,10 @@ export class AppComponent {
     return AuthService.isAuthenticated();
   }
 
+  isAdmin() {
+    return AuthService.isAdmin();
+  }
+
   logout() {
     this.LoginService.logout();
   }
