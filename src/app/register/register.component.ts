@@ -18,7 +18,7 @@ export class RegisterComponent {
     private router: Router
   ){}
   
-  error_msg = '';
+  register_msg = '';
   registermodel = new AccountsModel('','','','','','','');
 
   doRegister(): void {
@@ -33,7 +33,7 @@ export class RegisterComponent {
                                 this.registermodel = new AccountsModel('','','','','','','');
                             }, 
                             err => {
-                                this.error_msg = err;
+                                this.register_msg = err;
                             });
   }
 

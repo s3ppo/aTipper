@@ -2,6 +2,9 @@
   <md-card class="login_container"> 
     <md-card-title>Login</md-card-title>
     <md-card-content>
+      <div class="login_msg" *ngIf="error_msg">
+        <span class="error_msg">{{error_msg}}</span>
+      </div>
       <div class="login_form">
         <form (ngSubmit)="doLogin()" #LoginForm="ngForm">
           <md-input placeholder="Username" [(ngModel)]="loginmodel.username" name="username">
@@ -20,9 +23,6 @@
           <br>
           <button md-raised-button color="primary" class="btn_login" type="submit">Login</button>
         </form>
-      </div>
-      <div class="login_error" *ngIf="error_msg">
-        <span class="error_msg">{{error_msg}}</span>
       </div>
     </md-card-content>
   </md-card>

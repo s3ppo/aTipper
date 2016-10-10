@@ -12,8 +12,8 @@ export class AccountsService {
 
   constructor (
       private http: Http,
-      private router: Router) 
-  {}
+      private router: Router 
+  ){}
 
   private LoginUrl = 'http://atipper.moniholz.at/accounts';
 
@@ -23,7 +23,11 @@ export class AccountsService {
     let options = new RequestOptions({ headers: headers });
 
     return this.http.post(this.LoginUrl, name, options)
-                    .map((res:Response) => res.json())
+                    .map((res:Response) => {
+                      if(res.status == 200){
+                        res.json();
+                      }
+                    })
                     .catch((error:any) => Observable.throw(error.json()._error.message || 'Server error'));
   }
 
