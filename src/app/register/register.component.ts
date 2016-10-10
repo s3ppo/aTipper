@@ -17,11 +17,24 @@ export class RegisterComponent {
     private AccountsService: AccountsService,
     private router: Router
   ){}
-
+  
+  error_msg = '';
   registermodel = new AccountsModel('','','','','','','');
 
   doRegister(): void {
+    if(this.registermodel.password == this.registermodel.password2){
+      delete this.registermodel.password2;
+    }
 
+    let commentOperation:Observable<AccountsModel>;
+    commentOperation = this.AccountsService.create(this.registermodel);
+    commentOperation.subscribe(
+                            carepersons => {
+                                this.registermodel = new AccountsModel('','','','','','','');
+                            }, 
+                            err => {
+                                this.error_msg = err;
+                            });
   }
 
 }

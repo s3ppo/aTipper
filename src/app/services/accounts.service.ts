@@ -5,7 +5,7 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 
 import { Observable } from 'rxjs';
 import { AccountsModel } from '../models/accounts';
-import { AuthService } from '../login/login.service';
+import { AuthService } from '../services/login.service';
 
 @Injectable()
 export class AccountsService {

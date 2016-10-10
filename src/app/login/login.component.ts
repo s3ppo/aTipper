@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
 
-import { LoginService } from './login.service';
+import { LoginService } from '../services/login.service';
 import { LoginModel } from '../models/login';
 
 @Component({

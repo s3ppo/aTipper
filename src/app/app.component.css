@@ -32,6 +32,13 @@
   margin-left: 10px;
 }
 
-md-sidenav {
-  width: 200px;
+@media(max-width:480px){
+  md-sidenav {
+      width: 125px;
+  }
+ }
+@media(min-width:480px){
+  md-sidenav {
+    width: 200px;
+  }
 }

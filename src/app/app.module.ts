@@ -12,7 +12,7 @@ import { IntroComponent } from './intro/intro.component';
 import { RegisterComponent } from './register/register.component';
 import { routing } from './app.routing';
 import { AuthGuard } from './shared/auth.guard';
-import { LoginService } from './login/login.service';
+import { LoginService } from './services/login.service';
 import { AccountsService } from './services/accounts.service';
 
 @NgModule({
