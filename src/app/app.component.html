@@ -6,6 +6,7 @@
       <a md-list-item *ngIf="!isAuth()" [routerLink]="['login']">Login</a>
       <a md-list-item *ngIf="!isAuth()" [routerLink]="['register']">Registrieren</a>
       <a md-list-item *ngIf="isAuth()"  [routerLink]="['dashboard']">Dashboard</a>
+      <a md-list-item *ngIf="isAuth()"  [routerLink]="['ranking']">Rangliste</a>
       <a md-list-item *ngIf="isAuth()"  [routerLink]="['tipp']">Tippen</a>
       <a md-list-item *ngIf="isAdmin()" [routerLink]="['admin']">Administration</a>
       <a md-list-item *ngIf="isAuth()"  (click)="logout()">Logout</a>
