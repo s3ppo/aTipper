@@ -12,6 +12,7 @@ import { IntroComponent } from './intro/intro.component';
 import { RegisterComponent } from './register/register.component';
 import { TippComponent } from './tipp/tipp.component';
 import { AdminComponent } from './admin/admin.component';
+import { AdminTeamsComponent } from './admin/teams/teams.component';
 import { routing } from './app.routing';
 import { AuthGuard } from './shared/auth.guard';
 import { AuthAdminGuard } from './shared/authadmin.guard';
@@ -27,6 +28,7 @@ import { AccountsService } from './services/accounts.service';
     RegisterComponent,
     TippComponent,
     AdminComponent,
+    AdminTeamsComponent,
   ],
   imports: [
     BrowserModule,

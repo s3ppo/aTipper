@@ -1,0 +1,19 @@
+<div class="card-container">
+    <md-card class="teams_create_container"> 
+        <md-card-title>Teams anlegen</md-card-title>
+        <md-card-content>
+            <form (ngSubmit)="doRegister()" #LoginForm="ngForm">
+                <md-input required placeholder="Teamname" [(ngModel)]="teams.teamname" name="teamname"></md-input><br>
+                <md-input required placeholder="Flag" [(ngModel)]="teams.flag" name="flag" type="file"></md-input><br>
+                <md-input placeholder="Group" [(ngModel)]="teams.group" name="group"></md-input><br>
+                <button md-raised-button color="primary" class="btn_newteam" type="submit">Registrieren</button>
+            </form>
+        </md-card-content>
+    </md-card>
+    <md-card class="teams_edit_container"> 
+    <md-card-title>Teams verwalten</md-card-title>
+    <md-card-content>
+        
+    </md-card-content>
+  </md-card>
+</div>
