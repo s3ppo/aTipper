@@ -19,16 +19,16 @@ export class AdminTeamsComponent {
 
   teamsmodel = new TeamsModel('', null, '');
 
-  selectFile($event): void {
-    var inputValue = $event.target;
-    this.teamsmodel.flag = inputValue.files[0];
+  selectFile(event): void {
+    this.teamsmodel.flag = event.srcElement.files[0];
+    //this.readThis(this.teamsmodel.flag);
   }
 
   doCreateTeam(): void {
     let commentOperation:Observable<TeamsModel>;
     commentOperation = this.teamsService.create(this.teamsmodel);
     commentOperation.subscribe(
-                            carepersons => {
+                            teams => {
                                 this.teamsmodel = new TeamsModel('', null, '');
                             }, 
                             err => {

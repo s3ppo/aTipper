@@ -8,6 +8,7 @@ import { Observable } from 'rxjs/Rx';
   styleUrls: ['./admin.component.css'],
   providers: []
 })
+
 export class AdminComponent {
 
   constructor(

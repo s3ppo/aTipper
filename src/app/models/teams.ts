@@ -2,7 +2,7 @@
 export class TeamsModel {
     constructor(
         public teamname: string,
-        public flag: File,
+        public flag: any,
         public group: string,
     ){}
 }

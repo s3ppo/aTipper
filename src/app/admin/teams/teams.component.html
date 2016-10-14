@@ -5,7 +5,7 @@
             <form (ngSubmit)="doCreateTeam()" #LoginForm="ngForm">
                 <md-input required placeholder="Teamname" [(ngModel)]="teamsmodel.teamname" name="teamname"></md-input><br>
                 <md-input placeholder="Group" [(ngModel)]="teamsmodel.group" name="group"></md-input><br>
-                Flag: <input type="file" (change)="selectFile($event)"><br>
+                Teamflag: <input type="file" (change)="selectFile($event)"><br>
                 <button md-raised-button color="primary" class="btn_newteam" type="submit">Anlegen</button>
             </form>
         </md-card-content>

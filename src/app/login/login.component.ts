@@ -25,7 +25,7 @@ export class LoginComponent {
     let commentOperation:Observable<LoginModel>;
     commentOperation = this.LoginService.get(this.loginmodel);
     commentOperation.subscribe(
-                            carepersons => {
+                            login => {
                                 this.loginmodel = new LoginModel('', '');
                             }, 
                             err => {
