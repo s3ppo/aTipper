@@ -18,6 +18,7 @@ import { AuthGuard } from './shared/auth.guard';
 import { AuthAdminGuard } from './shared/authadmin.guard';
 import { LoginService } from './services/login.service';
 import { AccountsService } from './services/accounts.service';
+import { TeamsService } from './services/teams.service';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { AccountsService } from './services/accounts.service';
   providers: [
     LoginService,
     AccountsService,
+    TeamsService,
     AuthGuard,
     AuthAdminGuard,
   ],

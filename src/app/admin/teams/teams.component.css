@@ -8,3 +8,10 @@
 .teams_edit_container {
     width:100%;
 }
+.btn_newteam {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+md-card {
+    margin: 16px;
+}

@@ -2,11 +2,11 @@
     <md-card class="teams_create_container"> 
         <md-card-title>Teams anlegen</md-card-title>
         <md-card-content>
-            <form (ngSubmit)="doRegister()" #LoginForm="ngForm">
-                <md-input required placeholder="Teamname" [(ngModel)]="teams.teamname" name="teamname"></md-input><br>
-                <md-input required placeholder="Flag" [(ngModel)]="teams.flag" name="flag" type="file"></md-input><br>
-                <md-input placeholder="Group" [(ngModel)]="teams.group" name="group"></md-input><br>
-                <button md-raised-button color="primary" class="btn_newteam" type="submit">Registrieren</button>
+            <form (ngSubmit)="doCreateTeam()" #LoginForm="ngForm">
+                <md-input required placeholder="Teamname" [(ngModel)]="teamsmodel.teamname" name="teamname"></md-input><br>
+                <md-input placeholder="Group" [(ngModel)]="teamsmodel.group" name="group"></md-input><br>
+                Flag: <input type="file" (change)="selectFile($event)"><br>
+                <button md-raised-button color="primary" class="btn_newteam" type="submit">Anlegen</button>
             </form>
         </md-card-content>
     </md-card>

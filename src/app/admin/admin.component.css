@@ -1,0 +1,13 @@
+.card-container {
+  display: flex;
+  flex-flow: row wrap;
+}
+.admin_container {
+    width:100%;
+}
+.admin_container {
+    width:100%;
+}
+md-card {
+    margin: 16px;
+}

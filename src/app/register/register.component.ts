@@ -15,7 +15,6 @@ export class RegisterComponent {
 
   constructor(
     private AccountsService: AccountsService,
-    private router: Router
   ){}
   
   register_msg = '';
