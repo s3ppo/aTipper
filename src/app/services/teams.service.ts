@@ -14,32 +14,32 @@ export class TeamsService {
 
   constructor (
       private http: Http,
-      private router: Router 
+      private router: Router,
   ){}
 
   private TeamsUrl = 'http://atipper.moniholz.at/teams';
 
   // Create a new Account
   create(name: Object): Observable<TeamsModel> {
-      let auth: string = AuthService.getAuth();
-      let headers = new Headers({ 'Content-Type': 'multipart/form-data' });
-      headers.append( 'Authorization', auth );
-      let options = new RequestOptions({ headers: headers });
-      options.method = RequestMethod.Post;
+    return Observable.create(observer => {
 
-      return this.http.post(this.TeamsUrl, JSON.stringify(name), options)
-                      .map((res:Response) => {
-                        if(res.status == 200){
-                          res.json();
-                        }
-                      })
-                      .catch((error:any) => Observable.throw(error.json()._error.message || 'Server error'));
-      
-      /*let xhr = new XMLHttpRequest();
-      xhr.setRequestHeader('Authorization', auth);
-      xhr.open('POST', this.TeamsUrl, true);
-      xhr.withCredentials = true;
-      xhr.send(name);*/
+        let formData: FormData = new FormData();
+        let xhr: XMLHttpRequest = new XMLHttpRequest();
+
+        xhr.open('POST', this.TeamsUrl);
+
+        let auth: string = AuthService.getAuth();
+        xhr.setRequestHeader('Authorization', auth);
+        //xhr.setRequestHeader("Content-Type", "multipart/form-data");
+
+        formData.append("teamname", name['teamname']);
+        formData.append("flag", name['flag'], name['flag']['name']);
+
+        xhr.send(formData);
+
+    })
   }
+
+  
 
 }
