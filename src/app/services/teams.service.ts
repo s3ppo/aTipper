@@ -18,28 +18,32 @@ export class TeamsService {
   ){}
 
   private TeamsUrl = 'http://atipper.moniholz.at/teams';
+  private auth: string = AuthService.getAuth();
 
-  // Create a new Account
+  // Create a new Team
   create(name: Object): Observable<TeamsModel> {
     return Observable.create(observer => {
-
         let formData: FormData = new FormData();
         let xhr: XMLHttpRequest = new XMLHttpRequest();
 
         xhr.open('POST', this.TeamsUrl);
-
-        let auth: string = AuthService.getAuth();
-        xhr.setRequestHeader('Authorization', auth);
+        xhr.setRequestHeader('Authorization', this.auth);
         //xhr.setRequestHeader("Content-Type", "multipart/form-data");
-
         formData.append("teamname", name['teamname']);
         formData.append("flag", name['flag'], name['flag']['name']);
 
         xhr.send(formData);
-
     })
   }
 
-  
+  // Get all existing Teams
+  getAll(): Observable<TeamsModel[]> {
+    let headers = new Headers({"Authorization": this.auth});
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.get(this.TeamsUrl, options)
+                    .map((res:Response) => res.json()._items)
+                    .catch((error:any) => Observable.throw(error.json()._error.message || 'Server error'));
+  }
 
 }

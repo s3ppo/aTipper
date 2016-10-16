@@ -22,9 +22,9 @@ export class LoginComponent {
   error_msg = '';
 
   doLogin(): void {
-    let commentOperation:Observable<LoginModel>;
-    commentOperation = this.LoginService.get(this.loginmodel);
-    commentOperation.subscribe(
+    let LoginOperation:Observable<LoginModel>;
+    LoginOperation = this.LoginService.get(this.loginmodel);
+    LoginOperation.subscribe(
                             login => {
                                 this.loginmodel = new LoginModel('', '');
                             }, 

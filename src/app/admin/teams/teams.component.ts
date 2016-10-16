@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
 
@@ -9,28 +9,35 @@ import { TeamsService } from '../../services/teams.service';
   selector: 'Admin_Teams',
   templateUrl: './teams.component.html',
   styleUrls: ['./teams.component.css'],
-  providers: []
+  providers: [],
 })
-export class AdminTeamsComponent {
+export class AdminTeamsComponent implements OnInit {
 
   constructor(
-    private teamsService: TeamsService,
+    private teamsService: TeamsService
   ){}
 
-  teamsmodel = new TeamsModel('', null, '');
+  private teamsmodel = new TeamsModel('', null, '');
+  private teamsmodelview: TeamsModel[];
 
   selectFile(event): void {
     this.teamsmodel.flag = event.srcElement.files[0];
-    //this.readThis(this.teamsmodel.flag);
   }
 
   doCreateTeam(): void {
-    let commentOperation:Observable<TeamsModel>;
-    commentOperation = this.teamsService.create(this.teamsmodel);
-    commentOperation.subscribe(
-                            teams => {
-                                this.teamsmodel = new TeamsModel('', null, '');
-                            }, 
+    let createteamOperation:Observable<TeamsModel>;
+    createteamOperation = this.teamsService.create(this.teamsmodel);
+    createteamOperation.subscribe(
+                            teams => { this.teamsmodel = new TeamsModel('', null, '') }, 
+                            err => {
+                                //this.register_msg = err;
+                            });
+  }
+
+  ngOnInit(): void {
+    this.teamsService.getAll()
+                     .subscribe(
+                            teams => { this.teamsmodelview = teams }, 
                             err => {
                                 //this.register_msg = err;
                             });

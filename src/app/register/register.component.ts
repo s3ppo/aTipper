@@ -25,9 +25,9 @@ export class RegisterComponent {
       delete this.registermodel.password2;
     }
 
-    let commentOperation:Observable<AccountsModel>;
-    commentOperation = this.AccountsService.create(this.registermodel);
-    commentOperation.subscribe(
+    let registerOperation:Observable<AccountsModel>;
+    registerOperation = this.AccountsService.create(this.registermodel);
+    registerOperation.subscribe(
                             register => {
                                 this.registermodel = new AccountsModel('','','','','','','');
                             }, 

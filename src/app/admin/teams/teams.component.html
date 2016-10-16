@@ -13,7 +13,9 @@
     <md-card class="teams_edit_container"> 
     <md-card-title>Teams verwalten</md-card-title>
     <md-card-content>
-        
+        <md-card *ngFor="let teamview of teamsmodelview">
+            <md-card-content><img [src]="'data:image/png;base64,'+teamview.flag" />{{teamview.teamname}}</md-card-content>
+        </md-card>
     </md-card-content>
   </md-card>
 </div>
