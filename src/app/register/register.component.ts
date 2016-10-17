@@ -31,7 +31,7 @@ export class RegisterComponent {
                             register => {
                                 this.registermodel = new AccountsModel('','','','','','','');
                                 this.register_msg[0] = 'success_msg';
-                                this.register_msg[1] = 'Neuer Account erfolgreich angelegt.;
+                                this.register_msg[1] = 'Neuer Account erfolgreich angelegt.';
                             }, 
                             err => {
                                 this.register_msg[0] = 'error_msg';
