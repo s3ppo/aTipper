@@ -15,3 +15,12 @@
 md-card {
     margin: 16px;
 }
+.teams_msg {
+    margin-bottom: 10px;
+}
+.error_msg {
+    color: red;
+}
+.success_msg {
+    color: green;
+}

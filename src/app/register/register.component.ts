@@ -17,7 +17,7 @@ export class RegisterComponent {
     private AccountsService: AccountsService,
   ){}
   
-  register_msg = '';
+  register_msg = ['',''];
   registermodel = new AccountsModel('','','','','','','');
 
   doRegister(): void {
@@ -30,9 +30,12 @@ export class RegisterComponent {
     registerOperation.subscribe(
                             register => {
                                 this.registermodel = new AccountsModel('','','','','','','');
+                                this.register_msg[0] = 'success_msg';
+                                this.register_msg[1] = 'Neuer Account erfolgreich angelegt.;
                             }, 
                             err => {
-                                this.register_msg = err;
+                                this.register_msg[0] = 'error_msg';
+                                this.register_msg[1] = err;
                             });
   }
 

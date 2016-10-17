@@ -15,6 +15,9 @@
 .error_msg {
     color: red;
 }
+.success_msg {
+    color: green;
+}
 md-card {
     margin: 16px;
 }

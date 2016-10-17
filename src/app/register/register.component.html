@@ -3,7 +3,7 @@
     <md-card-title>Registrieren</md-card-title>
     <md-card-content>
       <div class="register_msg" *ngIf="register_msg">
-        <span class="error_msg">{{register_msg}}</span>
+        <span class="{{register_msg[0]}}">{{register_msg[1]}}</span>
       </div>
       <div class="register_form">
         <form (ngSubmit)="doRegister()" #LoginForm="ngForm">

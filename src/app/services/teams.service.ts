@@ -28,7 +28,6 @@ export class TeamsService {
 
         xhr.open('POST', this.TeamsUrl);
         xhr.setRequestHeader('Authorization', this.auth);
-        //xhr.setRequestHeader("Content-Type", "multipart/form-data");
         formData.append("teamname", name['teamname']);
         formData.append("flag", name['flag'], name['flag']['name']);
 
