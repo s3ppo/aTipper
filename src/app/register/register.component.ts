@@ -23,6 +23,10 @@ export class RegisterComponent {
   doRegister(): void {
     if(this.registermodel.password == this.registermodel.password2){
       delete this.registermodel.password2;
+    } else {
+      this.register_msg[0] = 'error_msg';
+      this.register_msg[1] = 'Passwörter stimmen nicht überein.';
+      return;
     }
 
     let registerOperation:Observable<AccountsModel>;

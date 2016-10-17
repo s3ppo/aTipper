@@ -34,7 +34,7 @@
 
 @media(max-width:480px){
   md-sidenav {
-      width: 125px;
+      width: 135px;
   }
  }
 @media(min-width:480px){

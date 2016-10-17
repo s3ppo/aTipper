@@ -11,6 +11,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { IntroComponent } from './intro/intro.component';
 import { RegisterComponent } from './register/register.component';
 import { TippComponent } from './tipp/tipp.component';
+import { MembersComponent } from './members/members.component';
 import { AdminComponent } from './admin/admin.component';
 import { AdminTeamsComponent } from './admin/teams/teams.component';
 import { routing } from './app.routing';
@@ -28,6 +29,7 @@ import { TeamsService } from './services/teams.service';
     IntroComponent,
     RegisterComponent,
     TippComponent,
+    MembersComponent,
     AdminComponent,
     AdminTeamsComponent,
   ],

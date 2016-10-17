@@ -7,8 +7,8 @@
             </div>
             <form (ngSubmit)="doCreateTeam()" #LoginForm="ngForm">
                 <md-input required placeholder="Teamname" [(ngModel)]="teamsmodel.teamname" name="teamname"></md-input><br>
-                <md-input placeholder="Group" [(ngModel)]="teamsmodel.group" name="group"></md-input><br>
-                Teamflag: <input type="file" (change)="selectFile($event)" accept="image/*"><br>
+                <md-input placeholder="Group" [(ngModel)]="teamsmodel.group" name="group" maxlength="1"></md-input><br>
+                Flagge <input type="file" (change)="selectFile($event)" accept="image/*"><br>
                 <button md-raised-button color="primary" class="btn_newteam" type="submit">Anlegen</button>
             </form>
         </md-card-content>
@@ -16,15 +16,12 @@
     <md-card class="teams_edit_container"> 
     <md-card-title>Teams verwalten</md-card-title>
     <md-card-content>
-        <md-card *ngFor="let teamview of teamsmodelview">
-            <md-card-header>
+        <md-list>
+            <md-list-item *ngFor="let teamview of teamsmodelview">
                 <img md-card-avatar [src]="_DomSanitizationService.bypassSecurityTrustUrl('data:image/jpeg;base64,'+teamview.flag)" />
-                <md-card-title>{{teamview.teamname}}</md-card-title>
-            </md-card-header>
-            <md-card-content>
-
-            </md-card-content>
-        </md-card>
+                <h3 md-subheader>{{teamview.teamname}}</h3>     
+            </md-list-item>
+        </md-list>
     </md-card-content>
   </md-card>
 </div>
