@@ -3,7 +3,6 @@
   flex-flow: row wrap;
 }
 .members_container {
-    text-align: center;
     width:100%;
 }
 md-card {

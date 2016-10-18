@@ -2,15 +2,15 @@
   
   <md-sidenav #sidenav mode="push" class="app-sidenav md-sidenav-over">
     <md-nav-list>
-      <a md-list-item *ngIf="!isAuth()" [routerLink]="['introduction']">Einführung</a>
-      <a md-list-item *ngIf="!isAuth()" [routerLink]="['login']">Login</a>
-      <a md-list-item *ngIf="!isAuth()" [routerLink]="['register']">Registrieren</a>
-      <a md-list-item *ngIf="isAuth()"  [routerLink]="['dashboard']">Dashboard</a>
-      <a md-list-item *ngIf="isAuth()"  [routerLink]="['ranking']">Rangliste</a>
-      <a md-list-item *ngIf="isAuth()"  [routerLink]="['tipp']">Tippen</a>
-      <a md-list-item *ngIf="isAuth()"  [routerLink]="['members']">Mitspieler</a>
-      <a md-list-item *ngIf="isAdmin()" [routerLink]="['admin']">Administration</a>
-      <a md-list-item *ngIf="isAuth()"  (click)="logout()">Logout</a>
+      <a md-list-item *ngIf="!isAuth()" [routerLink]="['introduction']" (click)="sidenav.toggle()">Einführung</a>
+      <a md-list-item *ngIf="!isAuth()" [routerLink]="['login']" (click)="sidenav.toggle()">Login</a>
+      <a md-list-item *ngIf="!isAuth()" [routerLink]="['register']" (click)="sidenav.toggle()">Registrieren</a>
+      <a md-list-item *ngIf="isAuth()"  [routerLink]="['dashboard']" (click)="sidenav.toggle()">Dashboard</a>
+      <a md-list-item *ngIf="isAuth()"  [routerLink]="['ranking']" (click)="sidenav.toggle()">Rangliste</a>
+      <a md-list-item *ngIf="isAuth()"  [routerLink]="['tipp']" (click)="sidenav.toggle()">Tippen</a>
+      <a md-list-item *ngIf="isAuth()"  [routerLink]="['members']" (click)="sidenav.toggle()">Mitspieler</a>
+      <a md-list-item *ngIf="isAdmin()" [routerLink]="['admin']" (click)="sidenav.toggle()">Administration</a>
+      <a md-list-item *ngIf="isAuth()"  (click)="logout()" (click)="sidenav.toggle()">Logout</a>
     </md-nav-list>
   </md-sidenav>
 

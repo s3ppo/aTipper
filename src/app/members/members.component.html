@@ -1,0 +1,10 @@
+<div class="card-container">
+  <md-card class="members_container"> 
+    <md-card-title>Mitspieler</md-card-title>
+    <md-card-content>
+        <md-nav-list>
+            <a md-list-item *ngFor="let membermodel of membersmodel">{{membermodel.username}}</a>
+        </md-nav-list>
+    </md-card-content>
+  </md-card>
+</div>

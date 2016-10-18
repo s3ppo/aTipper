@@ -47,8 +47,7 @@ export class AdminTeamsComponent implements OnInit {
     this.teamsService.getAll()
                      .subscribe(
                             teams => { this.teamsmodelview = teams }, 
-                            err =>   { this.teams_msg[0] = 'error_msg';
-                                       this.teams_msg[1] = err; });
+                            err =>   { console.log(err) });
   }
 
 }

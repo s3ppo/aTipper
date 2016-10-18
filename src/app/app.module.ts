@@ -18,6 +18,7 @@ import { routing } from './app.routing';
 import { AuthGuard } from './shared/auth.guard';
 import { AuthAdminGuard } from './shared/authadmin.guard';
 import { LoginService } from './services/login.service';
+import { MembersService } from './services/members.service';
 import { AccountsService } from './services/accounts.service';
 import { TeamsService } from './services/teams.service';
 
@@ -42,6 +43,7 @@ import { TeamsService } from './services/teams.service';
   ],
   providers: [
     LoginService,
+    MembersService,
     AccountsService,
     TeamsService,
     AuthGuard,
