@@ -38,16 +38,21 @@ export class AdminTeamsComponent implements OnInit {
     createteamOperation.subscribe(
                             teams => { this.teamsmodel = new TeamsModel('', null, '');
                                        this.teams_msg[0] = 'success_msg';
-                                       this.teams_msg[1] = 'Neues Team wurde erfolgreich angelegt.' }, 
+                                       this.teams_msg[1] = 'Neues Team wurde erfolgreich angelegt.';
+                                       this.getAllTeams(); }, 
                             err =>   { this.teams_msg[0] = 'error_msg'
                                        this.teams_msg[1] = 'Neues Team konnte nicht angelegt werden.' });
   }
 
-  ngOnInit(): void {
+  getAllTeams(): void {
     this.teamsService.getAll()
                      .subscribe(
                             teams => { this.teamsmodelview = teams }, 
                             err =>   { console.log(err) });
+  }
+
+  ngOnInit(): void {
+    this.getAllTeams();
   }
 
 }

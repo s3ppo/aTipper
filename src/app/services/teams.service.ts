@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 import 'rxjs/add/operator/toPromise';
 
 import { TeamsModel } from '../models/teams';
-import { AuthService } from '../services/login.service';
+import { LoginService } from '../services/login.service';
 
 @Injectable()
 export class TeamsService {
@@ -18,11 +18,12 @@ export class TeamsService {
   ){}
 
   private TeamsUrl = 'http://atipper.moniholz.at/teams';
-  private auth: string = AuthService.getAuth();
+  private auth: string = LoginService.getAuth();
 
   // Create a new Team
-  create(name: Object): Observable<TeamsModel> {
-    return Observable.create(observer => {
+  create(name: Object) {//: Observable<TeamsModel> {
+    //return Observable.create(observer => {
+      return Observable.fromPromise(new Promise<TeamsModel>((resolve, reject) => {
         let formData: FormData = new FormData();
         let xhr: XMLHttpRequest = new XMLHttpRequest();
 
@@ -30,9 +31,20 @@ export class TeamsService {
         xhr.setRequestHeader('Authorization', this.auth);
         formData.append("teamname", name['teamname']);
         formData.append("flag", name['flag'], name['flag']['name']);
+        formData.append("group", name['group']);
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 201) {
+                    resolve(JSON.parse(xhr.response))
+                } else {
+                    reject(xhr.response)
+                }
+            }
+        }
 
         xhr.send(formData);
-    })
+    }));
   }
 
   // Get all existing Teams
