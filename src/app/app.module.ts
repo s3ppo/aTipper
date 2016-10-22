@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-import { MaterialModule } from '@angular/material';
+import { MaterialModule, MdIconRegistry } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -14,6 +14,7 @@ import { TippComponent } from './tipp/tipp.component';
 import { MembersComponent } from './members/members.component';
 import { AdminComponent } from './admin/admin.component';
 import { AdminTeamsComponent } from './admin/teams/teams.component';
+import { AdminMatchesComponent } from './admin/matches/matches.component';
 import { routing } from './app.routing';
 import { AuthGuard } from './shared/auth.guard';
 import { AuthAdminGuard } from './shared/authadmin.guard';
@@ -33,6 +34,7 @@ import { TeamsService } from './services/teams.service';
     MembersComponent,
     AdminComponent,
     AdminTeamsComponent,
+    AdminMatchesComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,6 +48,7 @@ import { TeamsService } from './services/teams.service';
     MembersService,
     AccountsService,
     TeamsService,
+    MdIconRegistry,
     AuthGuard,
     AuthAdminGuard,
   ],

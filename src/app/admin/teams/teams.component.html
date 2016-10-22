@@ -16,12 +16,15 @@
     <md-card class="teams_edit_container"> 
     <md-card-title>Teams verwalten</md-card-title>
     <md-card-content>
-        <md-list>
+        <md-nav-list>
             <md-list-item *ngFor="let teamview of teamsmodelview">
-                <img md-card-avatar [src]="_DomSanitizationService.bypassSecurityTrustUrl('data:image/jpeg;base64,'+teamview.flag)" />
-                <h3 md-subheader>{{teamview.teamname}}</h3>     
+                <img md-list-avatar [src]="_DomSanitizationService.bypassSecurityTrustUrl('data:image/jpeg;base64,'+teamview.flag)" />
+                <h3 md-subheader>{{teamview.teamname}}</h3>
+                <button md-icon-button (click)="delTeam(teamview)">
+                    <md-icon>delete</md-icon>
+                </button>
             </md-list-item>
-        </md-list>
+        </md-nav-list>
     </md-card-content>
   </md-card>
 </div>

@@ -20,9 +20,19 @@ export class TeamsService {
   private TeamsUrl = 'http://atipper.moniholz.at/teams';
   private auth: string = LoginService.getAuth();
 
+  // Get all existing Teams
+  getAll(): Observable<TeamsModel[]> {
+    let headers = new Headers({"Authorization": this.auth});
+    headers.append('Access-Control-Allow-Origin', '*');
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.get(this.TeamsUrl, options)
+                    .map((res:Response) => res.json()._items)
+                    .catch((error:any) => Observable.throw(error.json()._error.message || 'Server error'));
+  }
+
   // Create a new Team
-  create(name: Object) {//: Observable<TeamsModel> {
-    //return Observable.create(observer => {
+  create(name: Object) {
       return Observable.fromPromise(new Promise<TeamsModel>((resolve, reject) => {
         let formData: FormData = new FormData();
         let xhr: XMLHttpRequest = new XMLHttpRequest();
@@ -47,13 +57,20 @@ export class TeamsService {
     }));
   }
 
-  // Get all existing Teams
-  getAll(): Observable<TeamsModel[]> {
+  // Delete existing Team
+  delete(team: Object): Observable<TeamsModel> {
+    let delUrl = this.TeamsUrl + '/' + team['_id'];
     let headers = new Headers({"Authorization": this.auth});
+    headers.append("If-Match", team['_etag']);
+    headers.append("Content-Type", "application/json");
     let options = new RequestOptions({ headers: headers });
 
-    return this.http.get(this.TeamsUrl, options)
-                    .map((res:Response) => res.json()._items)
+    return this.http.delete(delUrl, options)
+                    .map((res:Response) => {
+                        if(res.status == 204){
+                            return [{ status: res.status, json: res }]
+                        }
+                    })
                     .catch((error:any) => Observable.throw(error.json()._error.message || 'Server error'));
   }
 

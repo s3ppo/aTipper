@@ -40,8 +40,9 @@ export class AdminTeamsComponent implements OnInit {
                                        this.teams_msg[0] = 'success_msg';
                                        this.teams_msg[1] = 'Neues Team wurde erfolgreich angelegt.';
                                        this.getAllTeams(); }, 
-                            err =>   { this.teams_msg[0] = 'error_msg'
-                                       this.teams_msg[1] = 'Neues Team konnte nicht angelegt werden.' });
+                            err =>   { this.teams_msg[0] = 'error_msg';
+                                       this.teams_msg[1] = 'Neues Team konnte nicht angelegt werden.';
+                                       this.getAllTeams(); });
   }
 
   getAllTeams(): void {
@@ -49,6 +50,16 @@ export class AdminTeamsComponent implements OnInit {
                      .subscribe(
                             teams => { this.teamsmodelview = teams }, 
                             err =>   { console.log(err) });
+  }
+
+  delTeam(team): void {
+    this.teamsService.delete(team)
+                         .subscribe(
+                            teams => { this.teams_msg[0] = 'success_msg';
+                                       this.teams_msg[1] = 'Team wurde erfolgreich gelöscht.'; 
+                                       this.getAllTeams(); }, 
+                            err =>   { this.teams_msg[0] = 'error_msg';
+                                       this.teams_msg[1] = 'Team konnte nicht gelöscht werden.'; });
   }
 
   ngOnInit(): void {

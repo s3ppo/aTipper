@@ -16,7 +16,12 @@ export class AppComponent {
   title = 'aTipper';
 
   isAuth() {
-    return AuthService.isAuthenticated();
+    let isLogged: string = AuthService.getAuth();
+    if(isLogged != "" && isLogged != undefined){
+      return true;
+    } else {
+      return false;
+    }
   }
 
   isAdmin() {

@@ -9,12 +9,8 @@ import { LoginModel } from '../models/login';
 @Injectable()
 export abstract class AuthService {
 
-  static loggedIn: boolean = false;
   static admin: boolean = false;
   static auth: string;
-  static isAuthenticated(): boolean {
-    return AuthService.loggedIn;
-  }
   static getAuth(): string {
     return AuthService.auth;
   }
@@ -29,6 +25,8 @@ export class LoginService extends AuthService {
 
   constructor (private http: Http,private router: Router) {
     super();
+    AuthService.auth = localStorage.getItem('Authorization');
+    AuthService.admin = !!localStorage.getItem('Admin');
   }
 
   private LoginUrl = 'http://atipper.moniholz.at/accounts';
@@ -43,9 +41,10 @@ export class LoginService extends AuthService {
     return this.http.get(loginurl, options)
                     .map((res:Response) => {
                       if(res.status == 200){
-                        AuthService.loggedIn = true;
+                        localStorage.setItem('Authorization', auth);
                         AuthService.auth = auth;
                         if(res.json().admin) {
+                          localStorage.setItem('Admin', 'TRUE')
                           AuthService.admin = res.json().admin;
                         }
                         this.router.navigate(['/dashboard']);
@@ -55,8 +54,10 @@ export class LoginService extends AuthService {
   }
 
   logout(): any {
-    AuthService.loggedIn = false;
     AuthService.admin = false;
+    AuthService.auth = "";
+    localStorage.removeItem('Authorization');
+    localStorage.removeItem('Admin');
     this.router.navigate(['/login']);
   };
 
