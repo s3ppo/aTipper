@@ -5,6 +5,28 @@
             <div class="matches_msg" *ngIf="matches_msg">
                 <span class="{{matches_msg[0]}}">{{matches_msg[1]}}</span>
             </div>
+            <form (ngSubmit)="doCreateMatch()" #LoginForm="ngForm">
+                <md-input required placeholder="Team1" [(ngModel)]="matchesmodel.team1" name="team1"></md-input><br>
+                <md-input required placeholder="Team2" [(ngModel)]="matchesmodel.team2" name="team2"></md-input><br>
+                <md-input required placeholder="Matchbeginn" [(ngModel)]="matchesmodel.matchstart" type="date" name="matchstart"></md-input><br>
+                <md-input required placeholder="Matchende" [(ngModel)]="matchesmodel.matchend" type="date" name="matchend"></md-input><br>
+                <md-input required placeholder="Deadline" [(ngModel)]="matchesmodel.deadline" type="date" name="deadline"></md-input><br>
+                <md-input required placeholder="Multiplikator" [(ngModel)]="matchesmodel.multiplier" name="multiplier"></md-input><br>
+                <button md-raised-button color="primary" class="btn_newmatch" type="submit">Anlegen</button>
+            </form>
         </md-card-content>
     </md-card>
+    <md-card class="matches_edit_container"> 
+    <md-card-title>Matches verwalten</md-card-title>
+    <md-card-content>
+        <md-nav-list>
+            <md-list-item *ngFor="let matchview of matchesmodelview">
+                <h3 md-subheader>{{matchview.team1}} - {{matchview.team2}}</h3>
+                <button md-icon-button (click)="delMatch(matchview)">
+                    <md-icon>delete</md-icon>
+                </button>
+            </md-list-item>
+        </md-nav-list>
+    </md-card-content>
+  </md-card>
 </div>

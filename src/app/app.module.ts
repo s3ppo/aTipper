@@ -22,6 +22,7 @@ import { LoginService } from './services/login.service';
 import { MembersService } from './services/members.service';
 import { AccountsService } from './services/accounts.service';
 import { TeamsService } from './services/teams.service';
+import { MatchesService } from './services/matches.service';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { TeamsService } from './services/teams.service';
     MembersService,
     AccountsService,
     TeamsService,
+    MatchesService,
     MdIconRegistry,
     AuthGuard,
     AuthAdminGuard,

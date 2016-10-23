@@ -36,6 +36,7 @@ export class LoginService extends AuthService {
     let loginurl = this.LoginUrl+'/'+name['username']+'/';
     let auth = "Basic " + btoa(name['username'] + ":" + name['password']);
     let headers = new Headers({"Authorization": auth});
+    headers.append('Access-Control-Allow-Origin', '*');
     let options = new RequestOptions({ headers: headers });
 
     return this.http.get(loginurl, options)
