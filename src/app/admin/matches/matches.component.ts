@@ -22,8 +22,14 @@ export class AdminMatchesComponent implements OnInit{
   private matches_msg = ['', ''];
 
   doCreateMatch(): void {
+    let postmatch = new MatchesModel(this.matchesmodel.team1,this.matchesmodel.team2,this.matchesmodel.category,'','','',this.matchesmodel.multiplier);
+    let matchstart = new Date(this.matchesmodel.matchstart);
+    matchstart.setHours();
+    matchstart.setMinutes();
+    postmatch.matchstart = matchstart.toUTCString();
+
     let creatematchOperation:Observable<MatchesModelUI>;
-    creatematchOperation = this.teamsService.create(this.matchesmodel);
+    creatematchOperation = this.teamsService.create(postmatch);
     creatematchOperation.subscribe(
                             teams => { this.matchesmodel = new MatchesModelUI('', '', '', '', '', '', '', '', '', '');
                                        this.matches_msg[0] = 'success_msg';

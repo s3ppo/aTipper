@@ -35,7 +35,7 @@ export class MatchesService {
     let headers = new Headers({"Authorization": this.auth});
     let options = new RequestOptions({ headers: headers });
 
-    return this.http.post(this.MatchesUrl, options)
+    return this.http.post(this.MatchesUrl, name, options)
                     .map((res:Response) => res.json())
                     .catch((error:any) => Observable.throw(error.json()._error.message || 'Server error'));
   }
