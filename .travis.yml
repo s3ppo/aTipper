@@ -2,7 +2,7 @@ sudo: required
 dist: trusty
 language: node_js
 node_js:
-  - '4.2'
+  - '6.9.1'
 
 addons:
 apt:
@@ -22,7 +22,6 @@ before_script:
 - npm install -g karma
 - npm install -g reflect-metadata
 - npm install -g portfinder
-- npm install
 - ng build
 
 script: karma start config/karma.conf.js --single-run
