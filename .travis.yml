@@ -20,6 +20,8 @@ before_install:
 before_script:
 - npm install -g angular-cli
 - npm install -g karma
+- npm install -g reflect-metadata
+- npm install -g portfinder
 - npm install
 - ng build
 
