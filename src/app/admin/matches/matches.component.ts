@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
 
-import { MatchesModel } from '../../models/matches';
+import { MatchesModelUI, MatchesModel } from '../../models/matches';
 import { MatchesService } from '../../services/matches.service';
 
 @Component({
@@ -17,15 +17,15 @@ export class AdminMatchesComponent implements OnInit{
     private teamsService: MatchesService
   ){}
 
-  private matchesmodel = new MatchesModel('', '', '', '', '', '', '');
+  private matchesmodel = new MatchesModelUI('', '', '', '', '', '', '', '', '', '');
   private matchesmodelview: MatchesModel[];
   private matches_msg = ['', ''];
 
   doCreateMatch(): void {
-    let creatematchOperation:Observable<MatchesModel>;
+    let creatematchOperation:Observable<MatchesModelUI>;
     creatematchOperation = this.teamsService.create(this.matchesmodel);
     creatematchOperation.subscribe(
-                            teams => { this.matchesmodel = new MatchesModel('', '', '', '', '', '', '');
+                            teams => { this.matchesmodel = new MatchesModelUI('', '', '', '', '', '', '', '', '', '');
                                        this.matches_msg[0] = 'success_msg';
                                        this.matches_msg[1] = 'Neues Team wurde erfolgreich angelegt.';
                                        this.getAllMatches(); },
