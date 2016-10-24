@@ -14,37 +14,66 @@ import { MatchesService } from '../../services/matches.service';
 export class AdminMatchesComponent implements OnInit{
 
   constructor(
-    private teamsService: MatchesService
+    private matchesService: MatchesService
   ){}
 
-  private matchesmodel = new MatchesModelUI('', '', '', '', '', '', '', '', '', '');
+  private matchesmodel = new MatchesModelUI('', '', '', '', '', '', '', '', '', '', '');
   private matchesmodelview: MatchesModel[];
   private matches_msg = ['', ''];
 
   doCreateMatch(): void {
-    let postmatch = new MatchesModel(this.matchesmodel.team1,this.matchesmodel.team2,this.matchesmodel.category,'','','',this.matchesmodel.multiplier);
-    let matchstart = new Date(this.matchesmodel.matchstart);
-    matchstart.setHours();
-    matchstart.setMinutes();
-    postmatch.matchstart = matchstart.toUTCString();
+    let postmatch = new MatchesModel(this.matchesmodel.team1,this.matchesmodel.team2,this.matchesmodel.category,this.matchesmodel.matchlocation,'','','',parseInt(this.matchesmodel.multiplier));
+    let matchdate: Date;
+    let hours: number;
+    let minutes: number;
+    //Prepare Matchstart
+    matchdate = new Date(this.matchesmodel.matchstart);
+    hours = parseInt(this.matchesmodel.matchstarttime.substring(0,2));
+    minutes = parseInt(this.matchesmodel.matchstarttime.substring(3));
+    console.log(hours);
+    console.log(minutes);
+    matchdate.setHours(hours,minutes);
+    postmatch.matchstart = matchdate.toUTCString();
+    //Prepare Matchend
+    matchdate = new Date(this.matchesmodel.matchend);
+    hours = parseInt(this.matchesmodel.matchendtime.substring(0,2));
+    minutes = parseInt(this.matchesmodel.matchendtime.substring(3));
+    matchdate.setHours(hours,minutes);
+    postmatch.matchend = matchdate.toUTCString();
+    //Prepare Deadline
+    matchdate = new Date(this.matchesmodel.deadline);
+    hours = parseInt(this.matchesmodel.deadlinetime.substring(0,2));
+    minutes = parseInt(this.matchesmodel.deadlinetime.substring(3));
+    matchdate.setHours(hours,minutes);
+    postmatch.deadline = matchdate.toUTCString();
 
     let creatematchOperation:Observable<MatchesModelUI>;
-    creatematchOperation = this.teamsService.create(postmatch);
+    creatematchOperation = this.matchesService.create(postmatch);
     creatematchOperation.subscribe(
-                            teams => { this.matchesmodel = new MatchesModelUI('', '', '', '', '', '', '', '', '', '');
+                            matches => { this.matchesmodel = new MatchesModelUI('', '', '', '', '', '', '', '', '', '', '');
                                        this.matches_msg[0] = 'success_msg';
-                                       this.matches_msg[1] = 'Neues Team wurde erfolgreich angelegt.';
+                                       this.matches_msg[1] = 'Neues Match wurde erfolgreich angelegt.';
                                        this.getAllMatches(); },
                             err =>   { this.matches_msg[0] = 'error_msg';
-                                       this.matches_msg[1] = 'Neues Team konnte nicht angelegt werden.';
+                                       this.matches_msg[1] = 'Neues Match konnte nicht angelegt werden.';
                                        this.getAllMatches(); });
   }
 
   getAllMatches(): void {
-    this.teamsService.getAll()
+    this.matchesService.getAll()
                      .subscribe(
                             matches => { this.matchesmodelview = matches }, 
                             err =>   { console.log(err) });
+  }
+
+  delMatch(match): void {
+    this.matchesService.delete(match)
+                         .subscribe(
+                            matches => { this.matches_msg[0] = 'success_msg';
+                                       this.matches_msg[1] = 'Match wurde erfolgreich gelöscht.'; 
+                                       this.getAllMatches(); }, 
+                            err =>   { this.matches_msg[0] = 'error_msg';
+                                       this.matches_msg[1] = 'Match konnte nicht gelöscht werden.'; });
   }
 
   ngOnInit(): void {

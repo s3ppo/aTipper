@@ -4,6 +4,7 @@ export class MatchesModelUI {
         public team1: string,
         public team2: string,
         public category: string,
+        public matchlocation: string,
         public matchstart: string,
         public matchstarttime: string,
         public matchend: string,
@@ -19,9 +20,10 @@ export class MatchesModel {
         public team1: string,
         public team2: string,
         public category: string,
+        public matchlocation: string,
         public matchstart: string,
         public matchend: string,
         public deadline: string,
-        public multiplier: string,
+        public multiplier: number,
     ){}
 }
