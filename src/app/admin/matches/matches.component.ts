@@ -26,6 +26,7 @@ export class AdminMatchesComponent implements OnInit{
     let matchdate: Date;
     let hours: number;
     let minutes: number;
+
     //Prepare Matchstart
     matchdate = new Date(this.matchesmodel.matchstart);
     hours = parseInt(this.matchesmodel.matchstarttime.substring(0,2));
