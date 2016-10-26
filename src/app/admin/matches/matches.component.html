@@ -8,7 +8,8 @@
             <form (ngSubmit)="doCreateMatch()" #LoginForm="ngForm">
                 <md-input required placeholder="Team1" [(ngModel)]="matchesmodel.team1" name="team1"></md-input> - 
                 <md-input required placeholder="Team2" [(ngModel)]="matchesmodel.team2" name="team2"></md-input><br>
-                <md-input required placeholder="Kategorie" [(ngModel)]="matchesmodel.category" name="category"></md-input><br>
+                <md-input required placeholder="Kategorie" [(ngModel)]="matchesmodel.category" name="category"></md-input>&nbsp;
+                <button md-mini-fab color="primary" (click)="openAddCategory()" type="button"><md-icon class="md-24">add</md-icon></button><br>
                 <md-input required placeholder="Matchort" [(ngModel)]="matchesmodel.matchlocation" name="matchlocation"></md-input><br>
                 <md-input required placeholder="Matchbeginn" [(ngModel)]="matchesmodel.matchstart" type="date" name="matchstart"></md-input>
                 <md-input required [(ngModel)]="matchesmodel.matchstarttime" type="time" name="matchstarttime"></md-input><br>

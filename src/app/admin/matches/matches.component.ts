@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
+
+import { MdDialogRef, MdDialog, Overlay, MdDialogConfig } from '@angular/material';
 
 import { MatchesModelUI, MatchesModel } from '../../models/matches';
 import { MatchesService } from '../../services/matches.service';
@@ -14,9 +16,12 @@ import { MatchesService } from '../../services/matches.service';
 export class AdminMatchesComponent implements OnInit{
 
   constructor(
-    private matchesService: MatchesService
+    private matchesService: MatchesService,
+    public dialog: MdDialog,
+    public viewContainerRef: ViewContainerRef
   ){}
 
+  dialogRef: MdDialogRef<AdminCategoryDialog>;
   private matchesmodel = new MatchesModelUI('', '', '', '', '', '', '', '', '', '', '');
   private matchesmodelview: MatchesModel[];
   private matches_msg = ['', ''];
@@ -80,5 +85,31 @@ export class AdminMatchesComponent implements OnInit{
   ngOnInit(): void {
     this.getAllMatches();
   }
+
+  openAddCategory() {
+    let config = new MdDialogConfig();
+    config.viewContainerRef = this.viewContainerRef;
+
+    this.dialogRef = this.dialog.open(AdminCategoryDialog, config);
+
+    this.dialogRef.afterClosed().subscribe(result => {
+      console.log('result: ' + result);
+      this.dialogRef = null;
+    });
+  }
+
+}
+
+@Component({
+  selector: 'categories-dialog',
+  templateUrl: './category.component.html',
+  styleUrls: ['./category.component.css'],
+  providers: [],
+})
+export class AdminCategoryDialog {
+
+  constructor(
+    public dialogRef: MdDialogRef<AdminCategoryDialog>
+  ){}
 
 }

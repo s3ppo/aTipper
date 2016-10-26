@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-import { MaterialModule, MdIconRegistry } from '@angular/material';
+import { MaterialModule, MdIconRegistry, MdDialog, Overlay, OVERLAY_PROVIDERS, InteractivityChecker } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -14,7 +14,7 @@ import { TippComponent } from './tipp/tipp.component';
 import { MembersComponent } from './members/members.component';
 import { AdminComponent } from './admin/admin.component';
 import { AdminTeamsComponent } from './admin/teams/teams.component';
-import { AdminMatchesComponent } from './admin/matches/matches.component';
+import { AdminMatchesComponent, AdminCategoryDialog } from './admin/matches/matches.component';
 import { routing } from './app.routing';
 import { AuthGuard } from './shared/auth.guard';
 import { AuthAdminGuard } from './shared/authadmin.guard';
@@ -36,6 +36,7 @@ import { MatchesService } from './services/matches.service';
     AdminComponent,
     AdminTeamsComponent,
     AdminMatchesComponent,
+    AdminCategoryDialog,
   ],
   imports: [
     BrowserModule,
@@ -51,10 +52,19 @@ import { MatchesService } from './services/matches.service';
     TeamsService,
     MatchesService,
     MdIconRegistry,
+    MdDialog,
+    Overlay,
+    OVERLAY_PROVIDERS,
+    InteractivityChecker,
     AuthGuard,
     AuthAdminGuard,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [
+    AppComponent
+  ],
+  entryComponents: [
+    AdminCategoryDialog
+  ]
 })
 export class AppModule {
 
