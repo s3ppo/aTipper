@@ -27,7 +27,7 @@
     <md-card-content>
         <md-nav-list>
             <md-list-item *ngFor="let matchview of matchesmodelview">
-                <h3 md-subheader>{{matchview.team1}} - {{matchview.team2}}</h3>
+                <h3 md-subheader>{{matchview.team1.teamname}} - {{matchview.team2.teamname}}</h3>
                 <button md-icon-button (click)="delMatch(matchview)">
                     <md-icon>delete</md-icon>
                 </button>

@@ -23,5 +23,3 @@ before_script:
 - npm install -g reflect-metadata
 - npm install -g portfinder
 - ng build
-
-script: karma start karma.conf.js --single-run

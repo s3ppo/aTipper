@@ -21,16 +21,17 @@ export class MatchesService {
 
   // Get all existing Matches
   getAll(): Observable<MatchesModel[]> {
+    let url = this.MatchesUrl + '?embedded={"team1":1,"team2":1,"category":1}';
     let headers = new Headers({"Authorization": this.auth});
     headers.append('Access-Control-Allow-Origin', '*');
     let options = new RequestOptions({ headers: headers });
 
-    return this.http.get(this.MatchesUrl, options)
+    return this.http.get(url, options)
                     .map((res:Response) => res.json()._items)
                     .catch((error:any) => Observable.throw(error.json()._error.message || 'Server error'));
   }
 
-  // Create a new Match
+  // Create a new Match 
   create(name: Object) {
     let headers = new Headers({"Authorization": this.auth});
     let options = new RequestOptions({ headers: headers });

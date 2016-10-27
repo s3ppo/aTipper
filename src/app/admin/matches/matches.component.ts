@@ -68,7 +68,7 @@ export class AdminMatchesComponent implements OnInit{
   getAllMatches(): void {
     this.matchesService.getAll()
                      .subscribe(
-                            matches => { this.matchesmodelview = matches }, 
+                            matches => { this.matchesmodelview = matches; console.log(matches) }, 
                             err =>   { console.log(err) });
   }
 
