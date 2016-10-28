@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
 
@@ -11,7 +11,7 @@ import { CategoriesService } from '../services/categories.service';
   styleUrls: ['./tipp.component.css'],
   providers: []
 })
-export class TippComponent {
+export class TippComponent implements OnInit{
 
   constructor(
     private router: Router,
