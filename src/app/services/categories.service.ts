@@ -18,7 +18,7 @@ export class CategoriesService {
   private CategoriesUrl = 'http://atipper.moniholz.at/categories';
   private auth: string = LoginService.getAuth();
 
-  // Create a new Account
+  // Create a new Category
   create(name: Object): Observable<CategoriesModel> {
     let headers = new Headers({"Authorization": this.auth});
     let options = new RequestOptions({ headers: headers });
@@ -29,6 +29,17 @@ export class CategoriesService {
                         res.json();
                       }
                     })
+                    .catch((error:any) => Observable.throw(error.json()._error.message || 'Server error'));
+  }
+
+  // get all existing Categories
+  getAll(): Observable<CategoriesModel[]> {
+    let headers = new Headers({"Authorization": this.auth});
+    headers.append('Access-Control-Allow-Origin', '*');
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.get(this.CategoriesUrl, options)
+                    .map((res:Response) => res.json()._items)
                     .catch((error:any) => Observable.throw(error.json()._error.message || 'Server error'));
   }
 

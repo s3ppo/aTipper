@@ -70,7 +70,7 @@ export class AdminMatchesComponent implements OnInit{
   getAllMatches(): void {
     this.matchesService.getAll()
                      .subscribe(
-                            matches => { this.matchesmodelview = matches; console.log(matches) }, 
+                            matches => { this.matchesmodelview = matches }, 
                             err =>   { console.log(err) });
   }
 
@@ -98,7 +98,7 @@ export class AdminMatchesComponent implements OnInit{
       if(result == 'ok'){
         this.matches_msg[0] = 'success_msg';
         this.matches_msg[1] = 'Neue Kategorie wurde erfolgreich angelegt.'
-      } else {
+      } else if(result != null) {
         this.matches_msg[0] = 'error_msg';
         this.matches_msg[1] = 'Kategorie konnte nicht angelegt werden.';
       }
@@ -130,6 +130,10 @@ export class AdminCategoryDialog {
                             categories => { this.categorymodel = new CategoriesModel('');
                                             this.dialogRef.close('ok') },
                             err =>   { this.dialogRef.close(err) });
+  }
+
+  cancel(): void {
+    this.dialogRef.close(null);
   }
 
 }

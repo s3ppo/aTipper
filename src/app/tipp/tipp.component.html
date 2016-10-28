@@ -9,7 +9,10 @@
       Ausschlaggebend zur Punkteberechnung ist das Ergebnis nach 90 Minuten + Nachspielzeit.<br>
       (dh. keine Verlängerung oder Elfmeterschießen)<br>
       <md-nav-list>
-
+        <md-list-item *ngFor="let category of categoriesModelAll">
+          <md-icon>toys</md-icon>&nbsp;
+          {{category.name}}
+        </md-list-item>
       </md-nav-list>
     </md-card-content>
   </md-card>
