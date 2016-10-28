@@ -1,0 +1,4 @@
+<form (ngSubmit)="doCreateCategory()" #LoginForm="ngForm">
+    <md-input required placeholder="Kategorie" [(ngModel)]="categorymodel.name" name="name"></md-input><br>
+    <button md-raised-button color="primary" class="btn_newcategory" type="submit">Anlegen</button>
+</form>

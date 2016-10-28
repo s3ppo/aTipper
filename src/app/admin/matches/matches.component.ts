@@ -5,7 +5,9 @@ import { Observable } from 'rxjs/Rx';
 import { MdDialogRef, MdDialog, Overlay, MdDialogConfig } from '@angular/material';
 
 import { MatchesModelUI, MatchesModel } from '../../models/matches';
+import { CategoriesModel } from '../../models/categories';
 import { MatchesService } from '../../services/matches.service';
+import { CategoriesService } from '../../services/categories.service';
 
 @Component({
   selector: 'Admin_Matches',
@@ -93,7 +95,13 @@ export class AdminMatchesComponent implements OnInit{
     this.dialogRef = this.dialog.open(AdminCategoryDialog, config);
 
     this.dialogRef.afterClosed().subscribe(result => {
-      console.log('result: ' + result);
+      if(result == 'ok'){
+        this.matches_msg[0] = 'success_msg';
+        this.matches_msg[1] = 'Neue Kategorie wurde erfolgreich angelegt.'
+      } else {
+        this.matches_msg[0] = 'error_msg';
+        this.matches_msg[1] = 'Kategorie konnte nicht angelegt werden.';
+      }
       this.dialogRef = null;
     });
   }
@@ -109,7 +117,19 @@ export class AdminMatchesComponent implements OnInit{
 export class AdminCategoryDialog {
 
   constructor(
-    public dialogRef: MdDialogRef<AdminCategoryDialog>
+    public dialogRef: MdDialogRef<AdminCategoryDialog>,
+    private categoriesService: CategoriesService,
   ){}
+
+  private categorymodel = new CategoriesModel('');
+
+  doCreateCategory(): void {
+    let createcategoryOperation:Observable<CategoriesModel>;
+    createcategoryOperation = this.categoriesService.create(this.categorymodel);
+    createcategoryOperation.subscribe(
+                            categories => { this.categorymodel = new CategoriesModel('');
+                                            this.dialogRef.close('ok') },
+                            err =>   { this.dialogRef.close(err) });
+  }
 
 }
