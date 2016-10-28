@@ -6,6 +6,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { IntroComponent } from './intro/intro.component';
 import { RegisterComponent } from './register/register.component';
 import { TippComponent } from './tipp/tipp.component';
+import { TipperComponent } from './tipper/tipper.component';
 import { AdminComponent } from './admin/admin.component';
 import { AdminTeamsComponent } from './admin/teams/teams.component';
 import { AdminMatchesComponent } from './admin/matches/matches.component';
@@ -21,6 +22,7 @@ const appRoutes: Routes = [
     { path: 'members', component: MembersComponent, canActivate: [AuthGuard] },
     { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
     { path: 'tipp', component: TippComponent, canActivate: [AuthGuard] },
+    { path: 'tipp/tipper', component: TipperComponent, canActivate: [AuthGuard] },
     { path: 'admin', component: AdminComponent, canActivate: [AuthAdminGuard] },
     { path: 'admin/teams', component: AdminTeamsComponent, canActivate: [AuthAdminGuard] },
     { path: 'admin/matches', component: AdminMatchesComponent, canActivate: [AuthAdminGuard] },

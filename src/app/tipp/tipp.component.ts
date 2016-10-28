@@ -31,5 +31,4 @@ export class TippComponent implements OnInit{
     this.getAllCategories();
   }
 
-
 }

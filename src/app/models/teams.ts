@@ -1,4 +1,4 @@
-/* * * ./app/models/login.ts * * */
+/* * * ./app/models/teams.ts * * */
 export class TeamsModel {
     constructor(
         public teamname: string,

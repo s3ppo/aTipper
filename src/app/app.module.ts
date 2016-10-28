@@ -11,6 +11,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { IntroComponent } from './intro/intro.component';
 import { RegisterComponent } from './register/register.component';
 import { TippComponent } from './tipp/tipp.component';
+import { TipperComponent } from './tipper/tipper.component';
 import { MembersComponent } from './members/members.component';
 import { AdminComponent } from './admin/admin.component';
 import { AdminTeamsComponent } from './admin/teams/teams.component';
@@ -33,6 +34,7 @@ import { CategoriesService } from './services/categories.service';
     IntroComponent,
     RegisterComponent,
     TippComponent,
+    TipperComponent,
     MembersComponent,
     AdminComponent,
     AdminTeamsComponent,

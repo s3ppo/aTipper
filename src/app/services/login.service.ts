@@ -11,11 +11,16 @@ export abstract class AuthService {
 
   static admin: boolean = false;
   static auth: string;
+  static userid: string;
+
   static getAuth(): string {
     return AuthService.auth;
   }
   static isAdmin(): boolean {
     return AuthService.admin;
+  }
+  static getUserId(): string {
+    return AuthService.userid;
   }
 
 }
@@ -27,6 +32,7 @@ export class LoginService extends AuthService {
     super();
     AuthService.auth = localStorage.getItem('Authorization');
     AuthService.admin = !!localStorage.getItem('Admin');
+    AuthService.userid = localStorage.getItem('UserID');
   }
 
   private LoginUrl = 'http://atipper.moniholz.at/accounts';
@@ -43,10 +49,11 @@ export class LoginService extends AuthService {
                     .map((res:Response) => {
                       if(res.status == 200){
                         localStorage.setItem('Authorization', auth);
+                        localStorage.setItem('UserID', res.json()._id);
                         AuthService.auth = auth;
-                        if(res.json().admin) {
+                        if(res.json().roles == 'admin') {
                           localStorage.setItem('Admin', 'TRUE')
-                          AuthService.admin = res.json().admin;
+                          AuthService.admin = true;
                         }
                         this.router.navigate(['/dashboard']);
                       }
@@ -59,6 +66,7 @@ export class LoginService extends AuthService {
     AuthService.auth = "";
     localStorage.removeItem('Authorization');
     localStorage.removeItem('Admin');
+    localStorage.removeItem('UserID');
     this.router.navigate(['/login']);
   };
 

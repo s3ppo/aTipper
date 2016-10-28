@@ -1,0 +1,19 @@
+.card-container {
+  display: flex;
+  flex-flow: row wrap;
+}
+.tipper_container {
+    width:100%;
+}
+md-card {
+    margin: 16px;
+}
+.tipper_msg {
+    margin-bottom: 10px;
+}
+.error_msg {
+    color: red;
+}
+.success_msg {
+    color: green;
+}
