@@ -24,12 +24,12 @@ export class AdminMatchesComponent implements OnInit{
   ){}
 
   dialogRef: MdDialogRef<AdminCategoryDialog>;
-  private matchesmodel = new MatchesModelUI('', '', '', '', '', '', '', '', '', '', '');
+  private matchesmodel = new MatchesModelUI('', '', '', '', '', '', '', '', '');
   private matchesmodelview: MatchesModel[];
   private matches_msg = ['', ''];
 
   doCreateMatch(): void {
-    let postmatch = new MatchesModel(this.matchesmodel.team1,this.matchesmodel.team2,this.matchesmodel.category,this.matchesmodel.matchlocation,'','','',parseInt(this.matchesmodel.multiplier));
+    let postmatch = new MatchesModel(this.matchesmodel.team1,this.matchesmodel.team2,this.matchesmodel.category,this.matchesmodel.matchlocation,'','',parseInt(this.matchesmodel.multiplier));
     let matchdate: Date;
     let hours: number;
     let minutes: number;
@@ -38,16 +38,8 @@ export class AdminMatchesComponent implements OnInit{
     matchdate = new Date(this.matchesmodel.matchstart);
     hours = parseInt(this.matchesmodel.matchstarttime.substring(0,2));
     minutes = parseInt(this.matchesmodel.matchstarttime.substring(3));
-    console.log(hours);
-    console.log(minutes);
     matchdate.setHours(hours,minutes);
     postmatch.matchstart = matchdate.toUTCString();
-    //Prepare Matchend
-    matchdate = new Date(this.matchesmodel.matchend);
-    hours = parseInt(this.matchesmodel.matchendtime.substring(0,2));
-    minutes = parseInt(this.matchesmodel.matchendtime.substring(3));
-    matchdate.setHours(hours,minutes);
-    postmatch.matchend = matchdate.toUTCString();
     //Prepare Deadline
     matchdate = new Date(this.matchesmodel.deadline);
     hours = parseInt(this.matchesmodel.deadlinetime.substring(0,2));
@@ -58,7 +50,7 @@ export class AdminMatchesComponent implements OnInit{
     let creatematchOperation:Observable<MatchesModelUI>;
     creatematchOperation = this.matchesService.create(postmatch);
     creatematchOperation.subscribe(
-                            matches => { this.matchesmodel = new MatchesModelUI('', '', '', '', '', '', '', '', '', '', '');
+                            matches => { this.matchesmodel = new MatchesModelUI('', '', '', '', '', '', '', '', '');
                                        this.matches_msg[0] = 'success_msg';
                                        this.matches_msg[1] = 'Neues Match wurde erfolgreich angelegt.';
                                        this.getAllMatches(); },

@@ -20,8 +20,14 @@ export class MatchesService {
   private auth: string = LoginService.getAuth();
 
   // Get all existing Matches
-  getAll(): Observable<MatchesModel[]> {
+  getAll(category?: string): Observable<MatchesModel[]> {
     let url = this.MatchesUrl + '?embedded={"team1":1,"team2":1,"category":1}';
+
+    //check if a category is set
+    if(category != undefined && category != ""){
+        url = url + '&where={"category":"'+category+'"}';
+    }
+
     let headers = new Headers({"Authorization": this.auth});
     headers.append('Access-Control-Allow-Origin', '*');
     let options = new RequestOptions({ headers: headers });

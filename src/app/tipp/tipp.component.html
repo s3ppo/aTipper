@@ -9,8 +9,8 @@
       Ausschlaggebend zur Punkteberechnung ist das Ergebnis nach 90 Minuten + Nachspielzeit.<br>
       (dh. keine Verlängerung oder Elfmeterschießen)<br>
       <md-nav-list>
-        <md-list-item *ngFor="let category of categoriesModelAll" [routerLink]="['tipper']">
-          <md-icon>toys</md-icon>&nbsp;
+        <md-list-item *ngFor="let category of categoriesModelAll" [routerLink]="['tipper', {category: category._id}]">
+          <md-icon>mode_edit</md-icon>&nbsp;
           {{category.name}}
         </md-list-item>
       </md-nav-list>
