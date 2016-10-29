@@ -17,3 +17,20 @@ md-card {
 .success_msg {
     color: green;
 }
+.teamflag {
+  width:50px;
+  height:50px;
+  margin: 5px auto;
+  overflow: hidden;
+  border-radius:50%;
+  position: relative;
+}
+
+.teamflag img {
+  width:50px;
+  height:50px;
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%)
+}

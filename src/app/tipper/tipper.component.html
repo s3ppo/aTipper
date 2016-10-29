@@ -1,8 +1,23 @@
 <div class="card-container">
   <md-card class="tipper_container"> 
-    <md-card-title>Tippen</md-card-title>
+    <md-card-title *ngIf="categoryname">{{categoryname}}</md-card-title>
+    <md-card-title *ngIf="!categoryname">Noch keine Matches in dieser Kategorie</md-card-title>
     <md-card-content>
-        OK
+        <md-grid-list cols="1" width="100%" rowHeight="50px">
+            <md-grid-tile *ngFor="let match of matchesmodelview">
+              <div class="teamflag">
+                <img [src]="_DomSanitizationService.bypassSecurityTrustUrl('data:image/jpeg;base64,'+match.team1.flag)" />
+              </div>
+              {{match.team1.teamname}}&nbsp;
+              <md-input type="number" name="result1" min="1" max="20"></md-input>
+              &nbsp;-&nbsp;
+              <md-input type="number" name="result2" min="1" max="20"></md-input>
+              &nbsp;{{match.team2.teamname}}
+              <div class="teamflag">
+                <img [src]="_DomSanitizationService.bypassSecurityTrustUrl('data:image/jpeg;base64,'+match.team2.flag)" />
+              </div>
+            </md-grid-tile>
+        </md-grid-list>
     </md-card-content>
   </md-card>
 </div>

@@ -15,7 +15,7 @@
                 <md-input required [(ngModel)]="matchesmodel.matchstarttime" type="time" name="matchstarttime"></md-input><br>
                 <md-input required placeholder="Deadline" [(ngModel)]="matchesmodel.deadline" type="date" name="deadline"></md-input>
                 <md-input required [(ngModel)]="matchesmodel.deadlinetime" type="time" name="deadlinetime"></md-input><br>
-                <md-input placeholder="Multiplikator" [(ngModel)]="matchesmodel.multiplier" maxlength="1" name="multiplier"></md-input><br>
+                <md-input placeholder="Multiplikator" [(ngModel)]="matchesmodel.multiplier" type="number" min="1" max="4" name="multiplier"></md-input><br>
                 <button md-raised-button color="primary" class="btn_newmatch" type="submit">Anlegen</button>
             </form>
         </md-card-content>
