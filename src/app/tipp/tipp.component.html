@@ -10,7 +10,7 @@
       (dh. keine Verlängerung oder Elfmeterschießen)<br>
       <md-nav-list>
         <md-list-item *ngFor="let category of categoriesModelAll" [routerLink]="['tipper', {category: category._id}]">
-          <md-icon>mode_edit</md-icon>&nbsp;
+          <md-icon svgSrc="/assets/soccer.svg"></md-icon>&nbsp;
           {{category.name}}
         </md-list-item>
       </md-nav-list>

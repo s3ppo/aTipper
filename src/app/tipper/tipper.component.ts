@@ -32,7 +32,8 @@ export class TipperComponent implements OnInit{
                      .subscribe(
                             matches => { this.matchesmodelview = matches;
                                          this.categoryname = matches[0]['category']['name'];
-                                         this.numbermatches = matches.length.toString(); },
+                                         this.numbermatches = matches.length.toString(); 
+                                        },
                             err =>   { console.log(err) });
     });
   }

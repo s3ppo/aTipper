@@ -6,7 +6,7 @@
     width:100%;
 }
 md-card {
-    margin: 16px;
+    margin: 5px;
 }
 .tipper_msg {
     margin-bottom: 10px;
@@ -17,20 +17,23 @@ md-card {
 .success_msg {
     color: green;
 }
-.teamflag {
-  width:50px;
-  height:50px;
-  margin: 5px auto;
-  overflow: hidden;
-  border-radius:50%;
-  position: relative;
+.matchwrapper {
+    width: 100%;
+    display: block;
 }
-
-.teamflag img {
-  width:50px;
-  height:50px;
-  position: absolute;
-  top:50%;
-  left:50%;
-  transform: translate(-50%,-50%)
+.matchtop {
+    width: 100%;
+    display: inline-block;
+}
+.matchbody {
+    width: 100%;
+    display: inline-block;
+}
+.matchbottom {
+    width: 100%;
+    display: inline-block;
+}
+.teamflag {
+    width: 50px;
+    height: 50px;
 }
