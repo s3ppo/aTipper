@@ -1,12 +1,10 @@
+.tipp_container {
+    width:100%;
+}
 .card-container {
   display: flex;
   flex-flow: row wrap;
 }
-
-.tipp_container {
-    width:100%;
-}
-
 md-card {
-    margin: 16px;
+    margin: 5px;
 }

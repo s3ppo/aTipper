@@ -1,6 +1,6 @@
 <div class="card-container">
   <md-card class="tipper_container"> 
-    <md-card-title *ngIf="categoryname">{{categoryname}}</md-card-title>
+    <md-card-title *ngIf="categoryname"><md-icon>back</md-icon>{{categoryname}}</md-card-title>
     <md-card-title *ngIf="!categoryname">Noch keine Matches in dieser Kategorie</md-card-title>
     <md-card-content>
         <md-grid-list cols="1" width="100%" rowHeight="50px">
