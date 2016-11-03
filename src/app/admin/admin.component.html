@@ -1,6 +1,6 @@
 <div class="card-container">
   <md-card class="admin_container"> 
-    <md-card-title>Administration</md-card-title>
+    <md-card-title><a [routerLink]="['/dashboard']"><md-icon>arrow_back</md-icon></a> &nbsp; Administration</md-card-title>
     <md-card-content>
         <md-nav-list>
             <a md-list-item [routerLink]="['teams']">Teams</a>

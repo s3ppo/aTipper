@@ -1,6 +1,6 @@
 <div class="card-container">
     <md-card class="matches_create_container"> 
-        <md-card-title>Matches anlegen</md-card-title>
+        <md-card-title><a [routerLink]="['/admin']"><md-icon>arrow_back</md-icon></a> &nbsp; Matches anlegen</md-card-title>
         <md-card-content>
             <div class="matches_msg" *ngIf="matches_msg">
                 <span class="{{matches_msg[0]}}">{{matches_msg[1]}}</span>

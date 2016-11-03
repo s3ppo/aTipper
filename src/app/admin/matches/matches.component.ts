@@ -57,43 +57,43 @@ export class AdminMatchesComponent implements OnInit{
     creatematchOperation = this.matchesService.create(postmatch);
     creatematchOperation.subscribe(
                             matches => { this.matchesmodel = new MatchesModelUI('', '', '', '', '', '', '', '', '');
-                                       this.matches_msg[0] = 'success_msg';
-                                       this.matches_msg[1] = 'Neues Match wurde erfolgreich angelegt.';
-                                       this.getAllMatches(); },
-                            err =>   { this.matches_msg[0] = 'error_msg';
-                                       this.matches_msg[1] = 'Neues Match konnte nicht angelegt werden.';
-                                       this.getAllMatches(); });
+                                         this.matches_msg[0] = 'success_msg';
+                                         this.matches_msg[1] = 'Neues Match wurde erfolgreich angelegt.';
+                                         this.getAllMatches(); },
+                            err     => { this.matches_msg[0] = 'error_msg';
+                                         this.matches_msg[1] = 'Neues Match konnte nicht angelegt werden.';
+                                         this.getAllMatches(); });
   }
 
   getAllMatches(): void {
     this.matchesService.getAll()
                      .subscribe(
                             matches => { this.matchesmodelview = matches },
-                            err =>   { console.log(err) });
+                            err     => { console.log(err) });
   }
 
   delMatch(match): void {
     this.matchesService.delete(match)
                          .subscribe(
                             matches => { this.matches_msg[0] = 'success_msg';
-                                       this.matches_msg[1] = 'Match wurde erfolgreich gelöscht.'; 
-                                       this.getAllMatches(); }, 
-                            err =>   { this.matches_msg[0] = 'error_msg';
-                                       this.matches_msg[1] = 'Match konnte nicht gelöscht werden.'; });
+                                         this.matches_msg[1] = 'Match wurde erfolgreich gelöscht.'; 
+                                         this.getAllMatches(); }, 
+                            err     => { this.matches_msg[0] = 'error_msg';
+                                         this.matches_msg[1] = 'Match konnte nicht gelöscht werden.'; });
   }
 
   getAllCategories(): void {
     this.categoriesService.getAll()
                   .subscribe(
                         categories => { this.categoriesmodelview = categories }, 
-                        err =>   { console.log(err) });
+                        err        => { console.log(err) });
   }
 
   getAllTeams(): void {
     this.teamsService.getAll()
                   .subscribe(
                         teams => { this.teamsmodelview = teams }, 
-                        err =>   { console.log(err) });
+                        err   => { console.log(err) });
   }
 
   ngOnInit(): void {

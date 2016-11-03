@@ -16,6 +16,7 @@ import { MembersComponent } from './members/members.component';
 import { AdminComponent } from './admin/admin.component';
 import { AdminTeamsComponent } from './admin/teams/teams.component';
 import { AdminMatchesComponent, AdminCategoryDialog } from './admin/matches/matches.component';
+import { AdminMembersComponent } from './admin/members/members.component';
 import { routing } from './app.routing';
 import { AuthGuard } from './shared/auth.guard';
 import { AuthAdminGuard } from './shared/authadmin.guard';
@@ -40,6 +41,7 @@ import { CategoriesService } from './services/categories.service';
     AdminTeamsComponent,
     AdminMatchesComponent,
     AdminCategoryDialog,
+    AdminMembersComponent,
   ],
   imports: [
     BrowserModule,

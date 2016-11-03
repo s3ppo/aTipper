@@ -7,10 +7,12 @@ import { IntroComponent } from './intro/intro.component';
 import { RegisterComponent } from './register/register.component';
 import { TippComponent } from './tipp/tipp.component';
 import { TipperComponent } from './tipper/tipper.component';
+import { MembersComponent } from './members/members.component';
 import { AdminComponent } from './admin/admin.component';
 import { AdminTeamsComponent } from './admin/teams/teams.component';
 import { AdminMatchesComponent } from './admin/matches/matches.component';
-import { MembersComponent } from './members/members.component';
+import { AdminMembersComponent } from './admin/members/members.component';
+
 import { AuthGuard } from "./shared/auth.guard";
 import { AuthAdminGuard } from "./shared/authadmin.guard";
 
@@ -26,6 +28,7 @@ const appRoutes: Routes = [
     { path: 'admin', component: AdminComponent, canActivate: [AuthAdminGuard] },
     { path: 'admin/teams', component: AdminTeamsComponent, canActivate: [AuthAdminGuard] },
     { path: 'admin/matches', component: AdminMatchesComponent, canActivate: [AuthAdminGuard] },
+    { path: 'admin/members', component: AdminMembersComponent, canActivate: [AuthAdminGuard] }
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);

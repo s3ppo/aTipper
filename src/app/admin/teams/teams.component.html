@@ -1,6 +1,6 @@
 <div class="card-container">
     <md-card class="teams_create_container"> 
-        <md-card-title>Teams anlegen</md-card-title>
+        <md-card-title><a [routerLink]="['/admin']"><md-icon>arrow_back</md-icon></a> &nbsp; Teams anlegen</md-card-title>
         <md-card-content>
             <div class="teams_msg" *ngIf="teams_msg">
                 <span class="{{teams_msg[0]}}">{{teams_msg[1]}}</span>
