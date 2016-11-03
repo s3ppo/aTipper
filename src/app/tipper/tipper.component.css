@@ -22,16 +22,33 @@ md-card {
     display: block;
 }
 .matchtop {
+    text-align: center;
     width: 100%;
     display: inline-block;
 }
 .matchbody {
     width: 100%;
-    display: inline-block;
+    display: flex;
+}
+.matchbody-col1 {
+    text-align: center;
+    width: 30%;
+}
+.matchbody-col2 {
+    vertical-align: middle;
+    text-align: center;
+    width: 40%;
+    height: auto;
+}
+.matchbody-col3 {
+    text-align: center;
+    width: 30%;
 }
 .matchbottom {
+    text-align: center;
     width: 100%;
     display: inline-block;
+    margin-bottom: 10px;
 }
 .teamflag {
     width: 50px;

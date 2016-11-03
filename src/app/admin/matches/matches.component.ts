@@ -102,7 +102,23 @@ export class AdminMatchesComponent implements OnInit{
     this.getAllTeams();
   }
 
-  openAddCategory() {
+  RemoveCategory(): void {
+    this.categoriesService.get(this.matchesmodel.category)
+                          .subscribe(
+                              categories => { this.RemoveCategoryDo(categories) });
+  }
+
+  RemoveCategoryDo(categorydel): void {
+    this.categoriesService.delete(categorydel)
+                          .subscribe(
+                              categories => { this.matches_msg[0] = 'success_msg';
+                                              this.matches_msg[1] = 'Kategorie wurde erfolgreich gelöscht.'; 
+                                              this.getAllCategories(); },
+                              err        => { this.matches_msg[0] = 'error_msg';
+                                              this.matches_msg[1] = 'Kategorie konnte nicht gelöscht werden.'; });
+  }
+
+  openAddCategory(): void {
     let config = new MdDialogConfig();
     config.viewContainerRef = this.viewContainerRef;
 

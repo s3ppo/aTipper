@@ -18,6 +18,7 @@
                     <option *ngFor="let category of categoriesmodelview" [value]="category._id">{{category.name}}</option>
                 </select>
                 &nbsp;
+                <button md-mini-fab color="primary" (click)="RemoveCategory()" type="button"><md-icon class="md-24">remove</md-icon></button>
                 <button md-mini-fab color="primary" (click)="openAddCategory()" type="button"><md-icon class="md-24">add</md-icon></button><br>
                 <md-input required placeholder="Matchort" [(ngModel)]="matchesmodel.matchlocation" name="matchlocation"></md-input><br>
                 <md-input required placeholder="Matchbeginn" [(ngModel)]="matchesmodel.matchstart" type="date" name="matchstart"></md-input>
