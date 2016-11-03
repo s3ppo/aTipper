@@ -6,9 +6,18 @@
                 <span class="{{matches_msg[0]}}">{{matches_msg[1]}}</span>
             </div>
             <form (ngSubmit)="doCreateMatch()" #LoginForm="ngForm">
-                <md-input required placeholder="Team1" [(ngModel)]="matchesmodel.team1" name="team1"></md-input> - 
-                <md-input required placeholder="Team2" [(ngModel)]="matchesmodel.team2" name="team2"></md-input><br>
-                <md-input required placeholder="Kategorie" [(ngModel)]="matchesmodel.category" name="category"></md-input>&nbsp;
+                <select [(ngModel)]="matchesmodel.team1" name="Team1">
+                    <option *ngFor="let team1 of teamsmodelview" [value]="team1._id">{{team1.teamname}}</option>
+                </select>
+                &nbsp; - &nbsp;
+                <select [(ngModel)]="matchesmodel.team2" name="Team2">
+                    <option *ngFor="let team2 of teamsmodelview" [value]="team2._id">{{team2.teamname}}</option>
+                </select>
+                <br>
+                <select [(ngModel)]="matchesmodel.category" name="category">
+                    <option *ngFor="let category of categoriesmodelview" [value]="category._id">{{category.name}}</option>
+                </select>
+                &nbsp;
                 <button md-mini-fab color="primary" (click)="openAddCategory()" type="button"><md-icon class="md-24">add</md-icon></button><br>
                 <md-input required placeholder="Matchort" [(ngModel)]="matchesmodel.matchlocation" name="matchlocation"></md-input><br>
                 <md-input required placeholder="Matchbeginn" [(ngModel)]="matchesmodel.matchstart" type="date" name="matchstart"></md-input>

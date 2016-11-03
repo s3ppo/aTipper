@@ -6,8 +6,10 @@ import { MdDialogRef, MdDialog, Overlay, MdDialogConfig } from '@angular/materia
 
 import { MatchesModelUI, MatchesModel } from '../../models/matches';
 import { CategoriesModel } from '../../models/categories';
+import { TeamsModel } from '../../models/teams';
 import { MatchesService } from '../../services/matches.service';
 import { CategoriesService } from '../../services/categories.service';
+import { TeamsService } from '../../services/teams.service';
 
 @Component({
   selector: 'Admin_Matches',
@@ -19,6 +21,8 @@ export class AdminMatchesComponent implements OnInit{
 
   constructor(
     private matchesService: MatchesService,
+    private categoriesService: CategoriesService,
+    private teamsService: TeamsService,
     public dialog: MdDialog,
     public viewContainerRef: ViewContainerRef
   ){}
@@ -27,6 +31,8 @@ export class AdminMatchesComponent implements OnInit{
   private matchesmodel = new MatchesModelUI('', '', '', '', '', '', '', '', '');
   private matchesmodelview: MatchesModel[];
   private matches_msg = ['', ''];
+  private teamsmodelview: TeamsModel[];
+  private categoriesmodelview: CategoriesModel[];
 
   doCreateMatch(): void {
     let postmatch = new MatchesModel(this.matchesmodel.team1,this.matchesmodel.team2,this.matchesmodel.category,this.matchesmodel.matchlocation,'','',parseInt(this.matchesmodel.multiplier));
@@ -62,7 +68,7 @@ export class AdminMatchesComponent implements OnInit{
   getAllMatches(): void {
     this.matchesService.getAll()
                      .subscribe(
-                            matches => { this.matchesmodelview = matches }, 
+                            matches => { this.matchesmodelview = matches },
                             err =>   { console.log(err) });
   }
 
@@ -76,8 +82,24 @@ export class AdminMatchesComponent implements OnInit{
                                        this.matches_msg[1] = 'Match konnte nicht gelöscht werden.'; });
   }
 
+  getAllCategories(): void {
+    this.categoriesService.getAll()
+                  .subscribe(
+                        categories => { this.categoriesmodelview = categories }, 
+                        err =>   { console.log(err) });
+  }
+
+  getAllTeams(): void {
+    this.teamsService.getAll()
+                  .subscribe(
+                        teams => { this.teamsmodelview = teams }, 
+                        err =>   { console.log(err) });
+  }
+
   ngOnInit(): void {
     this.getAllMatches();
+    this.getAllCategories();
+    this.getAllTeams();
   }
 
   openAddCategory() {
@@ -94,6 +116,7 @@ export class AdminMatchesComponent implements OnInit{
         this.matches_msg[0] = 'error_msg';
         this.matches_msg[1] = 'Kategorie konnte nicht angelegt werden.';
       }
+      this.getAllCategories();
       this.dialogRef = null;
     });
   }
