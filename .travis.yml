@@ -23,3 +23,5 @@ before_script:
 - npm install -g reflect-metadata
 - npm install -g portfinder
 - ng build
+
+script: ng test --watch false
