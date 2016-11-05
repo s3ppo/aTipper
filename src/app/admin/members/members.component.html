@@ -3,10 +3,10 @@
     <md-card-title><a [routerLink]="['/admin']"><md-icon>arrow_back</md-icon></a> &nbsp; Mitglieder</md-card-title>
     <md-card-content>
         <md-nav-list>
-          <md-list-item *ngFor="let adminmembermodel of adminmembersmodel">
+          <md-list-item *ngFor="let adminmembermodel of adminmembersmodel; let i = index;">
             {{adminmembermodel.username}}
             &nbsp;
-            <md-checkbox [(ngModel)]="adminmembermodel.paid" align="start">
+            <md-checkbox [(ngModel)]="adminmembermodel.paid" (change)="changePaid(i)" align="start">
               Bezahlt
             </md-checkbox>
             &nbsp;

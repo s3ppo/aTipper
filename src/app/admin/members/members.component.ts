@@ -39,4 +39,8 @@ export class AdminMembersComponent implements OnInit{
     this.getAllMembers();
   }
 
+  changePaid(index: Number): void {
+    
+  }
+
 }
