@@ -13,7 +13,6 @@ export class AppComponent {
   ) {}
   
   isLogged: boolean;
-  title = 'aTipper';
 
   isAuth() {
     let isLogged: string = AuthService.getAuth();

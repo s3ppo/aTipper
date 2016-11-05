@@ -9,5 +9,6 @@ export class AdminMembersModel {
         public favteam: string,
         public roles: string,
         public paid: boolean,
+        public admin: boolean,
     ){}
 }

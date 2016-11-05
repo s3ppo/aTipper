@@ -1,29 +1,24 @@
 <div class="card-container">
-  <md-card class="tipper_container">
-    <md-card-title *ngIf="categoryname"><a [routerLink]="['/tipp']"><md-icon>arrow_back</md-icon></a> &nbsp; {{categoryname}}</md-card-title>
-    <md-card-title *ngIf="!categoryname"><a [routerLink]="['/tipp']"><md-icon>arrow_back</md-icon></a></md-card-title>
-    <md-card-content>
-        <div style="width:100%" *ngFor="let match of matchesmodelview">
-          <div class="matchwrapper">
-            <div class="matchtop">{{match.matchlocation}}</div>
-            <div class="matchbody">
-              <div class="matchbody-col1">
-                <img class="teamflag" [src]="_DomSanitizationService.bypassSecurityTrustUrl('data:image/jpeg;base64,'+match.team1.flag)" /><br>
-                {{match.team1.teamname}}
-              </div>
-              <div class="matchbody-col2">
-                <md-input type="number" align="middle" name="result1" min="1" max="20"></md-input>
-                &nbsp;-&nbsp;
-                <md-input type="number" align="middle" name="result2" min="1" max="20"></md-input>
-              </div>
-              <div class="matchbody-col3">
-                <img class="teamflag" [src]="_DomSanitizationService.bypassSecurityTrustUrl('data:image/jpeg;base64,'+match.team2.flag)" /><br>
-                {{match.team2.teamname}}
-              </div>
-            </div>
-            <div class="matchbottom">{{match.matchstart}}</div>
-          </div>
+  <md-card class="match_container" *ngFor="let match of matchesmodelview; let i = index;">
+    <md-card-title *ngIf="i==0" style="margin-bottom:5px"><a [routerLink]="['/tipp']"><md-icon>arrow_back</md-icon></a> &nbsp; {{categoryname}}</md-card-title>
+    <md-card-content class="matchwrapper">
+      <div class="matchtop">{{match.matchlocation}}</div>
+      <div class="matchbody">
+        <div class="matchbody-col1">
+          <img class="teamflag" [src]="_DomSanitizationService.bypassSecurityTrustUrl('data:image/jpeg;base64,'+match.team1.flag)" /><br>
+          {{match.team1.teamname}}
         </div>
+        <div class="matchbody-col2">
+          <md-input type="number" align="middle" name="result1" min="1" max="20"></md-input>
+          &nbsp;-&nbsp;
+          <md-input type="number" align="middle" name="result2" min="1" max="20"></md-input>
+        </div>
+        <div class="matchbody-col3">
+          <img class="teamflag" [src]="_DomSanitizationService.bypassSecurityTrustUrl('data:image/jpeg;base64,'+match.team2.flag)" /><br>
+          {{match.team2.teamname}}
+        </div>
+      </div>
+      <div class="matchbottom">{{match.matchstart}}</div>
     </md-card-content>
   </md-card>
 </div>

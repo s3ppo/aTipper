@@ -4,9 +4,14 @@
 }
 .tipper_container {
     width:100%;
+    padding: 5px;
+}
+.match_container {
+    padding: 5px;
+    width: 100%;
 }
 md-card {
-    margin: 5px;
+    margin: 5px 5px 0px 5px;
 }
 .tipper_msg {
     margin-bottom: 10px;
@@ -48,7 +53,6 @@ md-card {
     text-align: center;
     width: 100%;
     display: inline-block;
-    margin-bottom: 10px;
 }
 .teamflag {
     width: 50px;

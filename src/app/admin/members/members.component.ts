@@ -22,8 +22,17 @@ export class AdminMembersComponent implements OnInit{
 
   getAllMembers(): void {
     this.adminmembersService.getAll().subscribe(
-                                  adminmembers  => { this.adminmembersmodel = adminmembers },
+                                  adminmembers  => { this.adminmembersmodel = adminmembers;
+                                                     this.setadminflag(); },
                                   err           => { console.log(err) });
+  }
+
+  setadminflag(): void {
+    this.adminmembersmodel.forEach(element => {
+      if(element.roles == "admin") {
+        element.admin = true;
+      }
+    });
   }
 
   ngOnInit(): void {

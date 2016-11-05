@@ -8,6 +8,7 @@ import { MaterialModule, MdIconRegistry, MdDialog, Overlay, OVERLAY_PROVIDERS, I
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { RankingComponent } from './ranking/ranking.component';
 import { IntroComponent } from './intro/intro.component';
 import { RegisterComponent } from './register/register.component';
 import { TippComponent } from './tipp/tipp.component';
@@ -33,6 +34,7 @@ import { CategoriesService } from './services/categories.service';
     AppComponent,
     LoginComponent,
     DashboardComponent,
+    RankingComponent,
     IntroComponent,
     RegisterComponent,
     TippComponent,
