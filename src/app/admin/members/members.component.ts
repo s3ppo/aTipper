@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
 
-import { MembersModel } from '../../models/members';
-import { MembersService } from '../../services/members.service';
+import { AdminMembersModel } from '../../models/adminmembers';
+import { AdminMembersService } from '../../services/adminmembers.service';
 
 @Component({
   selector: 'Members',
@@ -15,15 +15,19 @@ import { MembersService } from '../../services/members.service';
 export class AdminMembersComponent implements OnInit{
 
   constructor(
-    private membersService: MembersService,
+    private adminmembersService: AdminMembersService,
   ){}
 
-  private membersmodel: MembersModel[];
+  private adminmembersmodel: AdminMembersModel[];
+
+  getAllMembers(): void {
+    this.adminmembersService.getAll().subscribe(
+                                  adminmembers  => { this.adminmembersmodel = adminmembers },
+                                  err           => { console.log(err) });
+  }
 
   ngOnInit(): void {
-    this.membersService.getAll().subscribe(
-                                  teams => { this.membersmodel = teams }, 
-                                  err =>   { console.log(err) });
+    this.getAllMembers();
   }
 
 }

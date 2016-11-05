@@ -22,8 +22,8 @@ export class MembersComponent implements OnInit{
 
   ngOnInit(): void {
     this.membersService.getAll().subscribe(
-                                  teams => { this.membersmodel = teams }, 
-                                  err =>   { console.log(err) });
+                                  members => { this.membersmodel = members }, 
+                                  err     => { console.log(err) });
   }
 
 }

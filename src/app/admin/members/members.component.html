@@ -1,9 +1,22 @@
 <div class="card-container">
-  <md-card class="members_container"> 
-    <md-card-title><a [routerLink]="['/admin']"><md-icon>arrow_back</md-icon></a> &nbsp; Mitspieler</md-card-title>
+  <md-card class="members_container">
+    <md-card-title><a [routerLink]="['/admin']"><md-icon>arrow_back</md-icon></a> &nbsp; Mitglieder</md-card-title>
     <md-card-content>
         <md-nav-list>
-            <a md-list-item *ngFor="let membermodel of membersmodel">{{membermodel.username}}</a>
+          <md-list-item *ngFor="let adminmembermodel of adminmembersmodel">
+            {{adminmembermodel.username}}
+            &nbsp;
+            <md-checkbox [(ngModel)]="adminmembermodel.paid" align="start">
+              Bezahlt
+            </md-checkbox>
+            &nbsp;
+            <md-checkbox [(ngModel)]="adminmembermodel.admin" align="start">
+              Administrator
+            </md-checkbox>
+            <button md-icon-button (click)="setnewPassword()">
+              <md-icon>lock_open</md-icon>
+            </button>
+          </md-list-item>
         </md-nav-list>
     </md-card-content>
   </md-card>

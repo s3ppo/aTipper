@@ -22,6 +22,7 @@ import { AuthGuard } from './shared/auth.guard';
 import { AuthAdminGuard } from './shared/authadmin.guard';
 import { LoginService } from './services/login.service';
 import { MembersService } from './services/members.service';
+import { AdminMembersService } from './services/adminmembers.service';
 import { AccountsService } from './services/accounts.service';
 import { TeamsService } from './services/teams.service';
 import { MatchesService } from './services/matches.service';
@@ -57,6 +58,7 @@ import { CategoriesService } from './services/categories.service';
     TeamsService,
     MatchesService,
     CategoriesService,
+    AdminMembersService,
     MdIconRegistry,
     MdDialog,
     Overlay,
