@@ -19,10 +19,11 @@ export class AdminMembersService {
 
   // Get Members
   getAll(): Observable<AdminMembersModel[]> {
+    let adminmembersUrl = this.AdminMembersUrl + '?ts='+Date.now();
     let headers = new Headers({"Authorization": this.auth});
     let options = new RequestOptions({ headers: headers });
 
-    return this.http.get(this.AdminMembersUrl, options)
+    return this.http.get(adminmembersUrl, options)
                     .map((res:Response) => res.json()._items)
                     .catch((error:any) => Observable.throw(error.json()._error.message || 'Server error'));
   }

@@ -19,10 +19,11 @@ export class MembersService {
 
   // Get Members
   getAll(): Observable<MembersModel[]> {
+    let membersUrl = this.MembersUrl + '?ts='+Date.now();
     let headers = new Headers({"Authorization": this.auth});
     let options = new RequestOptions({ headers: headers });
 
-    return this.http.get(this.MembersUrl, options)
+    return this.http.get(membersUrl, options)
                     .map((res:Response) => res.json()._items)
                     .catch((error:any) => Observable.throw(error.json()._error.message || 'Server error'));
   }

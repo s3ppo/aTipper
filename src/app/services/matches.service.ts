@@ -21,7 +21,7 @@ export class MatchesService {
 
   // Get all existing Matches
   getAll(category?: string): Observable<MatchesModel[]> {
-    let url = this.MatchesUrl + '?embedded={"team1":1,"team2":1,"category":1}';
+    let url = this.MatchesUrl + '?embedded={"team1":1,"team2":1,"category":1}&ts='+Date.now();
 
     //check if a category is set
     if(category != undefined && category != ""){

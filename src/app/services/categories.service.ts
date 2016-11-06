@@ -20,6 +20,7 @@ export class CategoriesService {
 
   // get all existing Categories
   getAll(): Observable<CategoriesModel[]> {
+    let categoriesUrl = this.CategoriesUrl + '?ts='+Date.now();
     let headers = new Headers({"Authorization": this.auth});
     headers.append('Access-Control-Allow-Origin', '*');
     let options = new RequestOptions({ headers: headers });

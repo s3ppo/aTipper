@@ -22,11 +22,12 @@ export class TeamsService {
 
   // Get all existing Teams
   getAll(): Observable<TeamsModel[]> {
+    let teamsUrl = this.TeamsUrl + '?ts='+Date.now();
     let headers = new Headers({"Authorization": this.auth});
     headers.append('Access-Control-Allow-Origin', '*');
     let options = new RequestOptions({ headers: headers });
 
-    return this.http.get(this.TeamsUrl, options)
+    return this.http.get(teamsUrl, options)
                     .map((res:Response) => res.json()._items)
                     .catch((error:any) => Observable.throw(error.json()._error.message || 'Server error'));
   }
