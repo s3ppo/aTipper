@@ -27,4 +27,23 @@ export class AdminMembersService {
                     .catch((error:any) => Observable.throw(error.json()._error.message || 'Server error'));
   }
 
+  // Change Members
+  change(object: Object, value: string): Observable<AdminMembersModel> {
+    let changeUrl = this.AdminMembersUrl + '/' + object['_id'];
+    let headers = new Headers({"Authorization": this.auth});
+    headers.append('Content-Type', 'application/json');
+    headers.append('If-Match', object['_etag']);
+    let options = new RequestOptions({ headers: headers });
+    let body: string;
+    if(value == 'paid') {
+      body = '{"'+value+'":'+object[value]+'}';
+    } else if(value == 'roles') {
+      body = '{"'+value+'":"'+object[value]+'"}';
+    }
+
+    return this.http.patch(changeUrl, body, options)
+                    .map((res:Response) => res.json() )
+                    .catch((error:any) => Observable.throw(error.json()._error.message || 'Server error'));
+  }
+
 }

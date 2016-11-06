@@ -1,21 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
 
+import { MdSnackBar, MdSnackBarConfig } from '@angular/material';
+
 import { AdminMembersModel } from '../../models/adminmembers';
 import { AdminMembersService } from '../../services/adminmembers.service';
+import { AuthService } from '../../services/login.service';
 
 @Component({
   selector: 'Members',
   templateUrl: './members.component.html',
   styleUrls: ['./members.component.css'],
-  providers: []
+  providers: [MdSnackBar]
 })
 
 export class AdminMembersComponent implements OnInit{
 
   constructor(
     private adminmembersService: AdminMembersService,
+    private snackBar: MdSnackBar,
+    private viewContainerRef: ViewContainerRef
   ){}
 
   private adminmembersmodel: AdminMembersModel[];
@@ -39,8 +44,29 @@ export class AdminMembersComponent implements OnInit{
     this.getAllMembers();
   }
 
-  changePaid(index: Number): void {
-    
+  changePaid(index: number): void {
+    this.adminmembersService.change(this.adminmembersmodel[index], 'paid').subscribe(
+                              adminmembers  => { this.adminmembersmodel[index]["_etag"] = adminmembers["_etag"]; },
+                              err           => { console.log(err) });
+  }
+
+  changeAdmin(index: number): void {
+    if(this.adminmembersmodel[index].admin == true){
+      this.adminmembersmodel[index].roles = 'admin';
+    } else {
+      this.adminmembersmodel[index].roles = 'user';
+    }
+
+    // User is not allowed to unadmin himself
+    if(this.adminmembersmodel[index]['_id'] == AuthService.getUserId()) {
+      let config = new MdSnackBarConfig(this.viewContainerRef);
+      this.snackBar.open('Bad Idea!', '', config);
+      return;
+    }
+
+    this.adminmembersService.change(this.adminmembersmodel[index], 'roles').subscribe(
+                              adminmembers  => { this.adminmembersmodel[index]["_etag"] = adminmembers["_etag"]; },
+                              err           => { console.log(err) });
   }
 
 }

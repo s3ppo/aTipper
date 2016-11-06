@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-import { MaterialModule, MdIconRegistry, MdDialog, Overlay, OVERLAY_PROVIDERS, InteractivityChecker } from '@angular/material';
+import { MaterialModule, MdIconRegistry, MdDialog, Overlay, OVERLAY_PROVIDERS, InteractivityChecker, MdLiveAnnouncer } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -63,6 +63,7 @@ import { CategoriesService } from './services/categories.service';
     AdminMembersService,
     MdIconRegistry,
     MdDialog,
+    MdLiveAnnouncer,
     Overlay,
     OVERLAY_PROVIDERS,
     InteractivityChecker,

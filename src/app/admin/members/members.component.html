@@ -10,7 +10,7 @@
               Bezahlt
             </md-checkbox>
             &nbsp;
-            <md-checkbox [(ngModel)]="adminmembermodel.admin" align="start">
+            <md-checkbox [(ngModel)]="adminmembermodel.admin" (change)="changeAdmin(i)" align="start">
               Administrator
             </md-checkbox>
             <button md-icon-button (click)="setnewPassword()">
