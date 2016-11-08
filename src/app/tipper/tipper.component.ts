@@ -5,6 +5,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 import { MatchesService } from '../services/matches.service'
 import { MatchesModel } from '../models/matches';
+import { TippsModel } from '../models/tipps';
 
 @Component({
   selector: 'Tipper',
@@ -23,16 +24,16 @@ export class TipperComponent implements OnInit{
 
   private matchesmodelview: MatchesModel[];
   private categoryname: string;
-  private numbermatches: string;
+  private tippsmodelview: TippsModel[];
 
   ngOnInit(): void {
     this.route.params.forEach((params: Params) => {
       let category = params['category'];
+      //get matches for the selected category
       this.matchesservice.getAll(category)
                      .subscribe(
                             matches => { this.matchesmodelview = matches;
                                          this.categoryname = matches[0]['category']['name'];
-                                         this.numbermatches = matches.length.toString(); 
                                         },
                             err =>   { console.log(err) });
     });

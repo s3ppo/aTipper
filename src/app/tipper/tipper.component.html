@@ -12,9 +12,10 @@
           {{match.team1.teamname}}
         </div>
         <div class="matchbody-col2">
-          <md-input type="number" align="middle" name="result1" min="1" max="20"></md-input>
+          <md-input type="hidden" name="matchid" value="match._id"></md-input>
+          <md-input type="number" name="tipp1" name="result1" min="1" max="20"></md-input>
           &nbsp;-&nbsp;
-          <md-input type="number" align="middle" name="result2" min="1" max="20"></md-input>
+          <md-input type="number" name="tipp2" name="result2" min="1" max="20"></md-input>
         </div>
         <div class="matchbody-col3">
           <img class="teamflag" [src]="_DomSanitizationService.bypassSecurityTrustUrl('data:image/jpeg;base64,'+match.team2.flag)" /><br>
