@@ -34,9 +34,20 @@ export class TipperComponent implements OnInit{
                      .subscribe(
                             matches => { this.matchesmodelview = matches;
                                          this.categoryname = matches[0]['category']['name'];
+                                         this.tippsmodelview = this.createTippsCollection(this.matchesmodelview);
                                         },
                             err =>   { console.log(err) });
     });
+  }
+
+  createTippsCollection(matchesmodel): TippsModel[] {
+    let tipperline = new TippsModel('','',0,0);
+    let tipperlines = [];
+    for(let i=0; i<this.matchesmodelview.length; i++){
+      tipperline.matchid = this.matchesmodelview[i]['_id'];
+      tipperlines.push(tipperline);
+    }
+    return tipperlines;
   }
 
 }
