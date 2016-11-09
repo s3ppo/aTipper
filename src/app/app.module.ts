@@ -28,6 +28,7 @@ import { AccountsService } from './services/accounts.service';
 import { TeamsService } from './services/teams.service';
 import { MatchesService } from './services/matches.service';
 import { CategoriesService } from './services/categories.service';
+import { TippsService } from './services/tipps.service';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { CategoriesService } from './services/categories.service';
     MatchesService,
     CategoriesService,
     AdminMembersService,
+    TippsService,
     MdIconRegistry,
     MdDialog,
     MdLiveAnnouncer,

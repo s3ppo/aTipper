@@ -3,7 +3,8 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
 import { DomSanitizer } from '@angular/platform-browser';
 
-import { MatchesService } from '../services/matches.service'
+import { MatchesService } from '../services/matches.service';
+import { TippsService } from '../services/tipps.service';
 import { MatchesModel } from '../models/matches';
 import { TippsModel } from '../models/tipps';
 
@@ -29,23 +30,25 @@ export class TipperComponent implements OnInit{
   ngOnInit(): void {
     this.route.params.forEach((params: Params) => {
       let category = params['category'];
+
       //get matches for the selected category
       this.matchesservice.getAll(category)
                      .subscribe(
                             matches => { this.matchesmodelview = matches;
                                          this.categoryname = matches[0]['category']['name'];
-                                         this.tippsmodelview = this.createTippsCollection(this.matchesmodelview);
-                                        },
+                                         //Parse Date for Output
+                                         for(let i=0; i<this.matchesmodelview.length; i++){
+                                           this.matchesmodelview[i].matchstart = new Date(this.matchesmodelview[i].matchstart).toLocaleString();
+                                         }
+                                         this.tippsmodelview = this.createTippsCollection(this.matchesmodelview); },
                             err =>   { console.log(err) });
     });
   }
 
   createTippsCollection(matchesmodel): TippsModel[] {
-    let tipperline = new TippsModel('','',0,0);
     let tipperlines = [];
-    for(let i=0; i<this.matchesmodelview.length; i++){
-      tipperline.matchid = this.matchesmodelview[i]['_id'];
-      tipperlines.push(tipperline);
+    for(let i=0; i<matchesmodel.length; i++) {
+      tipperlines.push(new TippsModel('', this.matchesmodelview[i]['_id'], 0, 0));
     }
     return tipperlines;
   }

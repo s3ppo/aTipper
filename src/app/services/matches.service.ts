@@ -28,7 +28,7 @@ export class MatchesService {
         url = url + '&where={"category":"'+category+'"}';
     }
 
-    let headers = new Headers({"Authorization": this.auth});
+    let headers = new Headers({ 'Authorization': this.auth });
     headers.append('Access-Control-Allow-Origin', '*');
     let options = new RequestOptions({ headers: headers });
 

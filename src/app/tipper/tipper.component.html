@@ -1,6 +1,9 @@
 <div class="card-container">
   <md-card *ngIf="!categoryname" class="match_container">
     <md-card-title style="margin-bottom:5px"><a [routerLink]="['/tipp']"><md-icon>arrow_back</md-icon></a></md-card-title>
+    <md-card-content>
+      <md-spinner class="app-spinner"></md-spinner>
+    </md-card-content>
   </md-card>
   <md-card class="match_container" *ngFor="let match of matchesmodelview; let i = index;">
     <md-card-title *ngIf="i==0" style="margin-bottom:5px"><a [routerLink]="['/tipp']"><md-icon>arrow_back</md-icon></a> &nbsp; {{categoryname}}</md-card-title>
@@ -25,4 +28,7 @@
       <div class="matchbottom">{{match.matchstart}}</div>
     </md-card-content>
   </md-card>
+  <div class="btn_wrapper">
+    <button md-raised-button class="btn_tipp" color="primary">Absenden</button>
+  </div>
 </div>

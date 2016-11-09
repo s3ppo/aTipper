@@ -8,6 +8,7 @@
       <br>
       Ausschlaggebend zur Punkteberechnung ist das Ergebnis nach 90 Minuten + Nachspielzeit.<br>
       (dh. keine Verlängerung oder Elfmeterschießen)<br>
+      <md-spinner class="app-spinner" *ngIf="!loaded"></md-spinner>
       <md-nav-list>
         <md-list-item *ngFor="let category of categoriesModelAll" [routerLink]="['tipper', {category: category._id}]">
           <md-icon svgSrc="/assets/soccer.svg"></md-icon>&nbsp;

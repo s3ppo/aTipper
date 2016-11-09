@@ -19,11 +19,13 @@ export class TippComponent implements OnInit{
   ){}
 
   private categoriesModelAll = [];
+  private loaded: boolean;
 
   getAllCategories(): void {
     this.categoriesService.getAll()
                      .subscribe(
-                            matches => { this.categoriesModelAll = matches }, 
+                            matches => { this.categoriesModelAll = matches;
+                                         this.loaded = true; }, 
                             err =>   { console.log(err) });
   }
 

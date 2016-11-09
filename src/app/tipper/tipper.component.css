@@ -10,6 +10,11 @@
     padding: 5px;
     width: 100%;
 }
+.app-spinner {
+  height: 30px;
+  width: 30px;
+  display: inline-block;
+}
 md-card {
     margin: 5px 5px 0px 5px;
 }
@@ -57,4 +62,12 @@ md-card {
 .teamflag {
     width: 50px;
     height: 50px;
+}
+.btn_wrapper {
+    text-align: center;
+    width: 100%;
+}
+.btn_tipp {
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
