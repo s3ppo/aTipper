@@ -31,19 +31,31 @@ export class TipperComponent implements OnInit{
   ngOnInit(): void {
     this.route.params.forEach((params: Params) => {
       let category = params['category'];
-
-      //get matches for the selected category
-      this.matchesservice.getAll(category)
-                     .subscribe(
-                            matches => { this.matchesmodelview = matches;
-                                         this.categoryname = matches[0]['category']['name'];
-                                         //Parse Date for Output
-                                         for(let i=0; i<this.matchesmodelview.length; i++){
-                                           this.matchesmodelview[i].matchstart = new Date(this.matchesmodelview[i].matchstart).toLocaleString();
-                                         }
-                                         this.tippsmodelview = this.createTippsCollection(this.matchesmodelview); },
-                            err =>   { console.log(err) });
+      this.getAllTipps();
+      this.getAllMatches(category);
     });
+  }
+
+  getAllMatches(category: string): void {
+    //get matches for the selected category
+    this.matchesservice.getAll(category)
+                    .subscribe(
+                          matches => {  this.matchesmodelview = matches;
+                                        this.categoryname = matches[0]['category']['name'];
+                                        //Parse Date for Output
+                                        for(let i=0; i<this.matchesmodelview.length; i++){
+                                          this.matchesmodelview[i].matchstart = new Date(this.matchesmodelview[i].matchstart).toLocaleString();
+                                        }
+                                        this.tippsmodelview = this.createTippsCollection(this.matchesmodelview); },
+                          err     => {  });
+  }
+
+  getAllTipps(): void {
+    //get matches for the selected category
+    this.tippsservice.getAll()
+                    .subscribe(
+                          tipps => { this.tippsmodelview = tipps; },
+                          err   => { });
   }
 
   createTippsCollection(matchesmodel): TippsModel[] {

@@ -36,8 +36,21 @@ export class TippsService {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     headers.append('Authorization', this.auth);
     let options = new RequestOptions({ headers: headers });
+
     return this.http.post(this.TippsUrl, name, options)
                     .map((res:Response) => res.json())
+                    .catch((error:any) => Observable.throw(error.json()._error.message || 'Server error'));
+  }
+
+  // Get Single Tipp by matchid
+  getbyMatch(matchid: string): Observable<TippsModel> {
+    let tippUrl = this.TippsUrl + '?where={"matchid":"'+matchid+'"}';
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    headers.append('Authorization', this.auth);
+    let options = new RequestOptions({ headers: headers });
+    
+    return this.http.get(tippUrl, options)
+                    .map((res:Response) => res.json()._items[0])
                     .catch((error:any) => Observable.throw(error.json()._error.message || 'Server error'));
   }
 
