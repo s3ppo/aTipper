@@ -63,11 +63,8 @@ md-card {
     width: 50px;
     height: 50px;
 }
-.btn_wrapper {
-    text-align: center;
-    width: 100%;
-}
 .btn_tipp {
-    margin-top: 10px;
-    margin-bottom: 10px;
+    height: 20px;
+    margin-top: 2px;
+    margin-bottom: 2px;
 }

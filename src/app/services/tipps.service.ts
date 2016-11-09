@@ -17,19 +17,28 @@ export class TippsService {
 
   private TippsUrl = 'http://atipper.moniholz.at/tipps';
   private auth: string = LoginService.getAuth();
+  private userid: string = LoginService.getUserId();
+
+  // Get all Tipps
+  getAll(): Observable<TippsModel[]> {
+    let tippsUrl = this.TippsUrl + '?ts='+Date.now();
+    let headers = new Headers({"Authorization": this.auth});
+    headers.append('Access-Control-Allow-Origin', '*');
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.get(tippsUrl, options)
+                    .map((res:Response) => res.json()._items)
+                    .catch((error:any) => Observable.throw(error.json()._error.message || 'Server error'));
+  }
 
   // Create a new Tipp
-  create(name: Object): Observable<TippsModel> {
+  create(name: TippsModel): Observable<TippsModel> {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     headers.append('Authorization', this.auth);
     let options = new RequestOptions({ headers: headers });
-
+    name.user = this.userid;
     return this.http.post(this.TippsUrl, name, options)
-                    .map((res:Response) => {
-                      if(res.status == 200){
-                        res.json();
-                      }
-                    })
+                    .map((res:Response) => res.json())
                     .catch((error:any) => Observable.throw(error.json()._error.message || 'Server error'));
   }
 

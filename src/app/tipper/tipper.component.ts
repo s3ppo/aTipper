@@ -20,6 +20,7 @@ export class TipperComponent implements OnInit{
     private router: Router,
     private route: ActivatedRoute,
     private matchesservice: MatchesService,
+    private tippsservice: TippsService,
     private _DomSanitizationService: DomSanitizer,
   ){}
 
@@ -51,6 +52,14 @@ export class TipperComponent implements OnInit{
       tipperlines.push(new TippsModel('', this.matchesmodelview[i]['_id'], 0, 0));
     }
     return tipperlines;
+  }
+
+  submitTipps(index): void {
+    let createTippOperation:Observable<TippsModel>;
+    createTippOperation = this.tippsservice.create(this.tippsmodelview[index]);
+    createTippOperation.subscribe(
+                            tipps => { },
+                            err     => { });
   }
 
 }
