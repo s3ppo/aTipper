@@ -52,7 +52,7 @@ export class AdminMembersComponent implements OnInit{
 
   changeAdmin(index: number): void {
     // User is not allowed to unadmin himself
-    if(this.adminmembersmodel[index]['_id'] == AuthService.getUserId()) {
+    if(this.adminmembersmodel[index]['username'] == AuthService.getUserId()) {
       let config = new MdSnackBarConfig(this.viewContainerRef);
       this.snackBar.open('Bad Idea!', 'Close', config);
       return;

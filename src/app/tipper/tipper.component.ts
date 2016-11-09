@@ -49,7 +49,7 @@ export class TipperComponent implements OnInit{
   createTippsCollection(matchesmodel): TippsModel[] {
     let tipperlines = [];
     for(let i=0; i<matchesmodel.length; i++) {
-      tipperlines.push(new TippsModel('', this.matchesmodelview[i]['_id'], 0, 0));
+      tipperlines.push(new TippsModel(this.matchesmodelview[i]['_id'], 0, 0));
     }
     return tipperlines;
   }

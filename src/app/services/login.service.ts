@@ -49,8 +49,9 @@ export class LoginService extends AuthService {
                     .map((res:Response) => {
                       if(res.status == 200){
                         localStorage.setItem('Authorization', auth);
-                        localStorage.setItem('UserID', res.json()._id);
+                        localStorage.setItem('UserID', res.json().username);
                         AuthService.auth = auth;
+                        AuthService.userid = res.json().username;
                         if(res.json().roles == 'admin') {
                           localStorage.setItem('Admin', 'TRUE')
                           AuthService.admin = true;

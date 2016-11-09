@@ -36,7 +36,6 @@ export class TippsService {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     headers.append('Authorization', this.auth);
     let options = new RequestOptions({ headers: headers });
-    name.user = this.userid;
     return this.http.post(this.TippsUrl, name, options)
                     .map((res:Response) => res.json())
                     .catch((error:any) => Observable.throw(error.json()._error.message || 'Server error'));
