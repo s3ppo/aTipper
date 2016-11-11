@@ -46,7 +46,7 @@ export class TipperComponent implements OnInit{
                                         for(let i=0; i<this.matchesmodelview.length; i++){
                                           this.matchesmodelview[i].matchstart = new Date(this.matchesmodelview[i].matchstart).toLocaleString();
                                         }
-                                        this.tippsmodelview = this.createTippsCollection(this.matchesmodelview); },
+                                        this.tippsmodelview = this.createTippsCollection(); },
                           err     => {  });
   }
 
@@ -58,20 +58,43 @@ export class TipperComponent implements OnInit{
                           err   => { });
   }
 
-  createTippsCollection(matchesmodel): TippsModel[] {
+  createTippsCollection(): TippsModel[] {
     let tipperlines = [];
-    for(let i=0; i<matchesmodel.length; i++) {
-      tipperlines.push(new TippsModel(this.matchesmodelview[i]['_id'], 0, 0));
+    let tipp1: number;
+    let tipp2: number;
+    let etag: string;
+    for(let i=0; i<this.matchesmodelview.length; i++) {
+      tipp1 = 0;
+      tipp2 = 0;
+      etag = "";
+      for(let a=0; a<this.tippsmodelview.length; a++) {
+        if(this.tippsmodelview[a].matchid == this.matchesmodelview[i]['_id']) {
+          tipp1 = this.tippsmodelview[a].tipp1;
+          tipp2 = this.tippsmodelview[a].tipp2;
+          etag = this.tippsmodelview[a]['_etag'];
+        }
+      }
+      tipperlines.push(new TippsModel(this.matchesmodelview[i]['_id'], tipp1, tipp2));
+      if(etag != "") {
+        tipperlines['_etag'] = etag;
+      }
     }
     return tipperlines;
   }
 
-  submitTipps(index): void {
-    let createTippOperation:Observable<TippsModel>;
-    createTippOperation = this.tippsservice.create(this.tippsmodelview[index]);
-    createTippOperation.subscribe(
-                            tipps => { },
-                            err     => { });
+  submitTipps(): void {
+    this.tippsmodelview.forEach(element => {
+      if(!element.hasOwnProperty('_etag')) {
+        // Create
+        this.tippsservice.create(element)
+                        .subscribe(
+                            tipps => { element['_etag'] = tipps; console.log(tipps); },
+                            err   => { });
+      } else {
+        // Update
+
+      }
+    });
   }
 
 }
