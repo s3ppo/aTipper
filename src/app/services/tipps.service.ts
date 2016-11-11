@@ -55,7 +55,7 @@ export class TippsService {
   }
 
   // Change a Tipp
-  change(object: TippsModel): Observable<TippsModel> {
+  change(object: Object): Observable<TippsModel> {
     let tippUrl = this.TippsUrl + '/' + object['_id'];
     let headers = new Headers({ 'Content-Type': 'application/json' });
     headers.append('Authorization', this.auth);

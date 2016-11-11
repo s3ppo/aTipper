@@ -87,12 +87,15 @@ export class TipperComponent implements OnInit{
       if(!element.hasOwnProperty('_etag')) {
         // Create
         this.tippsservice.create(element)
-                        .subscribe(
-                            tipps => { element['_etag'] = tipps; console.log(tipps); },
+                         .subscribe(
+                            tipps => { element['_etag'] = tipps; },
                             err   => { });
       } else {
         // Update
-
+        this.tippsservice.change(element)
+                         .subscribe(
+                            tipps => { element['_etag'] = tipps; },
+                            err   => { });
       }
     });
   }
