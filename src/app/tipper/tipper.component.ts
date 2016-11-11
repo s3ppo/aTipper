@@ -31,8 +31,7 @@ export class TipperComponent implements OnInit{
   ngOnInit(): void {
     this.route.params.forEach((params: Params) => {
       let category = params['category'];
-      this.getAllTipps();
-      this.getAllMatches(category);
+      this.getAllTipps(category);
     });
   }
 
@@ -46,55 +45,54 @@ export class TipperComponent implements OnInit{
                                         for(let i=0; i<this.matchesmodelview.length; i++){
                                           this.matchesmodelview[i].matchstart = new Date(this.matchesmodelview[i].matchstart).toLocaleString();
                                         }
-                                        this.tippsmodelview = this.createTippsCollection(); },
+                                        this.tippsmodelview = this.createTippsCollection();},
                           err     => {  });
   }
 
-  getAllTipps(): void {
+  getAllTipps(category: string): void {
     //get matches for the selected category
     this.tippsservice.getAll()
                     .subscribe(
-                          tipps => { this.tippsmodelview = tipps; },
+                          tipps => { this.tippsmodelview = tipps;
+                                     this.getAllMatches(category); },
                           err   => { });
   }
 
   createTippsCollection(): TippsModel[] {
-    let tipperlines = [];
-    let tipp1: number;
-    let tipp2: number;
-    let etag: string;
-    for(let i=0; i<this.matchesmodelview.length; i++) {
-      tipp1 = 0;
-      tipp2 = 0;
-      etag = "";
-      for(let a=0; a<this.tippsmodelview.length; a++) {
-        if(this.tippsmodelview[a].matchid == this.matchesmodelview[i]['_id']) {
-          tipp1 = this.tippsmodelview[a].tipp1;
-          tipp2 = this.tippsmodelview[a].tipp2;
-          etag = this.tippsmodelview[a]['_etag'];
+    let tippermodel = [];
+    let matchexists: boolean;
+    let newtipp: TippsModel;
+
+    this.matchesmodelview.forEach( matchesline => {
+
+      matchexists = false;
+      this.tippsmodelview.forEach( tippsline => {
+        if(matchesline['_id'] == tippsline['matchid'] && matchexists == false) {
+          matchexists = true;
+          tippermodel.push(tippsline);
         }
+      })
+      if(matchexists == false) {
+        // Create
+        newtipp = new TippsModel(matchesline['_id'], -1, -1);
+        this.tippsservice.create(newtipp)
+                         .subscribe(
+                            tipps => { newtipp['_etag'] = tipps['_etag']; newtipp['_id'] = tipps['_id'];
+                                       tippermodel.push(newtipp); },
+                            err   => { });
       }
-      tipperlines.push(new TippsModel(this.matchesmodelview[i]['_id'], tipp1, tipp2));
-      if(etag != "") {
-        tipperlines['_etag'] = etag;
-      }
-    }
-    return tipperlines;
+
+    });
+    return tippermodel;
   }
 
   submitTipps(): void {
     this.tippsmodelview.forEach(element => {
-      if(!element.hasOwnProperty('_etag')) {
-        // Create
-        this.tippsservice.create(element)
-                         .subscribe(
-                            tipps => { element['_etag'] = tipps; },
-                            err   => { });
-      } else {
-        // Update
+      if(element.hasOwnProperty('_id')) {
+        // Update Tipps
         this.tippsservice.change(element)
                          .subscribe(
-                            tipps => { element['_etag'] = tipps; },
+                            tipps => { element['_etag'] = tipps['_etag']; },
                             err   => { });
       }
     });

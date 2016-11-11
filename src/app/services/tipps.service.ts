@@ -61,11 +61,11 @@ export class TippsService {
     headers.append('Authorization', this.auth);
     headers.append('If-Match', object['_etag']);
     let options = new RequestOptions({ headers: headers });
+    let body = '{'+'"tipp1":"'+object['tipp1']+'","tipp2":"'+object['tipp2']+'"}';
 
-    return this.http.get(tippUrl, options)
+    return this.http.patch(tippUrl, body, options)
                     .map((res:Response) => res.json()._items[0])
                     .catch((error:any) => Observable.throw(error.json()._error.message || 'Server error'));
-
   }
 
 }
