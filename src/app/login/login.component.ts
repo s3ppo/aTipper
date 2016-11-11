@@ -29,8 +29,7 @@ export class LoginComponent {
     LoginOperation = this.LoginService.get(this.loginmodel);
     LoginOperation.subscribe(
                             login => { this.loginmodel = new LoginModel('', ''); }, 
-                            err   => { let config = new MdSnackBarConfig(this.viewContainerRef);
-                                       this.snackBar.open('Benutzername ungültig!', 'Close', config); });
+                            err   => { this.snackBar.open('Benutzername ungültig!', 'Close'); });
   }
 
 }

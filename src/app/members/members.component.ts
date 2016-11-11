@@ -23,7 +23,7 @@ export class MembersComponent implements OnInit{
   ngOnInit(): void {
     this.membersService.getAll().subscribe(
                                   members => { this.membersmodel = members }, 
-                                  err     => { console.log(err) });
+                                  err     => { });
   }
 
 }
