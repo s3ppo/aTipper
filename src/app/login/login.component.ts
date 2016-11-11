@@ -2,7 +2,7 @@ import { Component, ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
 
-import { MdSnackBar, MdSnackBarConfig } from '@angular/material';
+import { MdSnackBar } from '@angular/material';
 
 import { LoginService } from '../services/login.service';
 import { LoginModel } from '../models/login';
