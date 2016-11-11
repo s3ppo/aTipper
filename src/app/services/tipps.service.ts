@@ -42,7 +42,7 @@ export class TippsService {
                     .catch((error:any) => Observable.throw(error.json()._error.message || 'Server error'));
   }
 
-  // Get Single Tipp by matchid
+  // Get Single Tipp by matchid  --> not in use
   getbyMatch(matchid: string): Observable<TippsModel> {
     let tippUrl = this.TippsUrl + '?where={"matchid":"'+matchid+'"}';
     let headers = new Headers({ 'Content-Type': 'application/json' });
@@ -52,6 +52,20 @@ export class TippsService {
     return this.http.get(tippUrl, options)
                     .map((res:Response) => res.json()._items[0])
                     .catch((error:any) => Observable.throw(error.json()._error.message || 'Server error'));
+  }
+
+  // Change a Tipp
+  change(object: TippsModel): Observable<TippsModel> {
+    let tippUrl = this.TippsUrl + '/' + object['_id'];
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    headers.append('Authorization', this.auth);
+    headers.append('If-Match', object['_etag']);
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.get(tippUrl, options)
+                    .map((res:Response) => res.json()._items[0])
+                    .catch((error:any) => Observable.throw(error.json()._error.message || 'Server error'));
+
   }
 
 }
