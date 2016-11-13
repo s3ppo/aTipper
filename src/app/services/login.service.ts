@@ -65,6 +65,7 @@ export class LoginService extends AuthService {
   logout(): any {
     AuthService.admin = false;
     AuthService.auth = "";
+    AuthService.userid = "";
     localStorage.removeItem('Authorization');
     localStorage.removeItem('Admin');
     localStorage.removeItem('UserID');

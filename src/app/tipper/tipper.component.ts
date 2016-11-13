@@ -27,6 +27,7 @@ export class TipperComponent implements OnInit{
   private matchesmodelview: MatchesModel[];
   private categoryname: string;
   private tippsmodelview: TippsModel[];
+  private loading: boolean;
 
   ngOnInit(): void {
     this.route.params.forEach((params: Params) => {
@@ -35,17 +36,18 @@ export class TipperComponent implements OnInit{
     });
   }
 
-  getAllMatches(category: string): void {
+  getAllMatches(category: string, tipps: Array<TippsModel>): void {
     //get matches for the selected category
     this.matchesservice.getAll(category)
                     .subscribe(
-                          matches => {  this.matchesmodelview = matches;
-                                        this.categoryname = matches[0]['category']['name'];
+                          matches => {  this.categoryname = matches[0]['category']['name'];
+                                        this.tippsmodelview = this.createTippsCollection(tipps, matches); 
+                                        this.matchesmodelview = matches;
                                         //Parse Date for Output
                                         for(let i=0; i<this.matchesmodelview.length; i++){
                                           this.matchesmodelview[i].matchstart = new Date(this.matchesmodelview[i].matchstart).toLocaleString();
                                         }
-                                        this.tippsmodelview = this.createTippsCollection();},
+                                     },
                           err     => {  });
   }
 
@@ -53,21 +55,19 @@ export class TipperComponent implements OnInit{
     //get matches for the selected category
     this.tippsservice.getAll()
                     .subscribe(
-                          tipps => { this.tippsmodelview = tipps;
-                                     this.getAllMatches(category); },
+                          tipps => { this.getAllMatches(category, tipps); },
                           err   => { });
   }
 
-  createTippsCollection(): TippsModel[] {
+  createTippsCollection(tipps: Array<TippsModel>, matches: Array<MatchesModel>): TippsModel[] {
     let tippermodel = [];
     let matchexists: boolean;
     let newtipp: TippsModel;
 
-    this.matchesmodelview.forEach( matchesline => {
-
+    matches.forEach( matchesline => {
       matchexists = false;
-      this.tippsmodelview.forEach( tippsline => {
-        if(matchesline['_id'] == tippsline['matchid'] && matchexists == false) {
+      tipps.forEach( tippsline => {
+        if(matchesline['_id'] == tippsline.matchid && matchexists == false) {
           matchexists = true;
           tippermodel.push(tippsline);
         }
@@ -75,10 +75,10 @@ export class TipperComponent implements OnInit{
       if(matchexists == false) {
         // Create
         newtipp = new TippsModel(matchesline['_id'], -1, -1);
+        tippermodel.push(newtipp);
         this.tippsservice.create(newtipp)
                          .subscribe(
-                            tipps => { newtipp['_etag'] = tipps['_etag']; newtipp['_id'] = tipps['_id'];
-                                       tippermodel.push(newtipp); },
+                            tipps => { matchesline['_etag'] = tipps['_etag']; matchesline['_id'] = tipps['_id']; },
                             err   => { });
       }
 
@@ -88,13 +88,11 @@ export class TipperComponent implements OnInit{
 
   submitTipps(): void {
     this.tippsmodelview.forEach(element => {
-      if(element.hasOwnProperty('_id')) {
-        // Update Tipps
-        this.tippsservice.change(element)
-                         .subscribe(
-                            tipps => { element['_etag'] = tipps['_etag']; },
-                            err   => { });
-      }
+      // Update Tipps
+      this.tippsservice.change(element)
+                        .subscribe(
+                          tipps => { element['_etag'] = tipps['_etag']; },
+                          err   => { });
     });
   }
 

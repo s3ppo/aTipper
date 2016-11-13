@@ -28,7 +28,10 @@
       <div class="matchbottom">{{match.matchstart}}</div>
     </md-card-content>
   </md-card>
-  <div class="btn_wrapper">
-    <button md-raised-button (click)="submitTipps()" class="btn_tipp" color="primary">Absenden</button>
+  <div *ngIf="categoryname" class="btn_wrapper">
+    <button md-raised-button (click)="submitTipps()" class="btn_tipp" color="primary">
+      <md-spinner *ngIf="loading" class="app-spinner"></md-spinner>
+      <span *ngIf="!loading">Absenden</span>
+    </button>
   </div>
 </div>
