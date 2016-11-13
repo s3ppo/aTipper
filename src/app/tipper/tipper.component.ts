@@ -26,7 +26,7 @@ export class TipperComponent implements OnInit{
 
   private matchesmodelview: MatchesModel[];
   private categoryname: string;
-  private tippsmodelview: TippsModel[];
+  private tippsmodelview = [];
   private loading: boolean;
 
   ngOnInit(): void {
@@ -36,12 +36,12 @@ export class TipperComponent implements OnInit{
     });
   }
 
-  getAllMatches(category: string, tipps: Array<TippsModel>): void {
+  getAllMatches(category: string): void {
     //get matches for the selected category
     this.matchesservice.getAll(category)
                     .subscribe(
                           matches => {  this.categoryname = matches[0]['category']['name'];
-                                        this.tippsmodelview = this.createTippsCollection(tipps, matches); 
+                                        this.tippsmodelview = this.createTippsCollection(matches);
                                         this.matchesmodelview = matches;
                                         //Parse Date for Output
                                         for(let i=0; i<this.matchesmodelview.length; i++){
@@ -55,45 +55,46 @@ export class TipperComponent implements OnInit{
     //get matches for the selected category
     this.tippsservice.getAll()
                     .subscribe(
-                          tipps => { this.getAllMatches(category, tipps); },
+                          tipps => { this.tippsmodelview = tipps;
+                                     this.getAllMatches(category); },
                           err   => { });
   }
 
-  createTippsCollection(tipps: Array<TippsModel>, matches: Array<MatchesModel>): TippsModel[] {
+  createTippsCollection(matches: Array<MatchesModel>): TippsModel[] {
     let tippermodel = [];
     let matchexists: boolean;
     let newtipp: TippsModel;
 
-    matches.forEach( matchesline => {
+    for(let i=0; i<matches.length; i++){
       matchexists = false;
-      tipps.forEach( tippsline => {
-        if(matchesline['_id'] == tippsline.matchid && matchexists == false) {
+      
+      for(let a=0;a<this.tippsmodelview.length;a++){
+        if(matches[i]['_id'] == this.tippsmodelview[a].matchid && matchexists == false) {
           matchexists = true;
-          tippermodel.push(tippsline);
+          tippermodel.push(this.tippsmodelview[a]);
         }
-      })
+      }
       if(matchexists == false) {
         // Create
-        newtipp = new TippsModel(matchesline['_id'], -1, -1);
+        newtipp = new TippsModel(matches[i]['_id'], -1, -1);
         tippermodel.push(newtipp);
         this.tippsservice.create(newtipp)
                          .subscribe(
-                            tipps => { matchesline['_etag'] = tipps['_etag']; matchesline['_id'] = tipps['_id']; },
+                            tipps => { this.tippsmodelview[i]['_etag'] = tipps['_etag']; this.tippsmodelview[i]['_id'] = tipps['_id']; },
                             err   => { });
       }
-
-    });
+    };
     return tippermodel;
   }
 
   submitTipps(): void {
-    this.tippsmodelview.forEach(element => {
+    for(let i=0;i<this.tippsmodelview.length;i++){
       // Update Tipps
-      this.tippsservice.change(element)
+      this.tippsservice.change(this.tippsmodelview[i])
                         .subscribe(
-                          tipps => { element['_etag'] = tipps['_etag']; },
+                          tipps => { this.tippsmodelview[i]['_etag'] = tipps['_etag']; },
                           err   => { });
-    });
+    };
   }
 
 }

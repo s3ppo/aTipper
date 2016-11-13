@@ -10,8 +10,8 @@ import { LoginModel } from '../models/login';
 export abstract class AuthService {
 
   static admin: boolean = false;
-  static auth: string;
-  static userid: string;
+  static auth: string = "";
+  static userid: string = "";
 
   static getAuth(): string {
     return AuthService.auth;

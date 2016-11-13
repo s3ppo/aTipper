@@ -64,7 +64,7 @@ export class TippsService {
     let body = '{'+'"tipp1":"'+object['tipp1']+'","tipp2":"'+object['tipp2']+'"}';
 
     return this.http.patch(tippUrl, body, options)
-                    .map((res:Response) => res.json()._items[0])
+                    .map((res:Response) => res.json())
                     .catch((error:any) => Observable.throw(error.json()._error.message || 'Server error'));
   }
 
