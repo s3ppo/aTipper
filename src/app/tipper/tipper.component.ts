@@ -28,10 +28,13 @@ export class TipperComponent implements OnInit{
   private categoryname: string;
   private tippsmodelview = [];
   private loading: boolean;
+  private preloadingDone: boolean;
 
   ngOnInit(): void {
+    this.preloadingDone = false;
     this.route.params.forEach((params: Params) => {
       let category = params['category'];
+      this.categoryname = params['categoryname'];
       this.getAllTipps(category);
     });
   }
@@ -40,13 +43,13 @@ export class TipperComponent implements OnInit{
     //get matches for the selected category
     this.matchesservice.getAll(category)
                     .subscribe(
-                          matches => {  this.categoryname = matches[0]['category']['name'];
-                                        this.tippsmodelview = this.createTippsCollection(matches);
+                          matches => {  this.tippsmodelview = this.createTippsCollection(matches);
                                         this.matchesmodelview = matches;
                                         //Parse Date for Output
                                         for(let i=0; i<this.matchesmodelview.length; i++){
                                           this.matchesmodelview[i].matchstart = new Date(this.matchesmodelview[i].matchstart).toLocaleString();
                                         }
+                                        this.preloadingDone = true;
                                      },
                           err     => {  });
   }

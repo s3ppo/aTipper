@@ -1,6 +1,6 @@
 <div class="card-container">
-  <md-card *ngIf="!categoryname" class="match_container">
-    <md-card-title style="margin-bottom:5px"><a [routerLink]="['/tipp']"><md-icon>arrow_back</md-icon></a></md-card-title>
+  <md-card *ngIf="!preloadingDone" class="match_container">
+    <md-card-title style="margin-bottom:5px"><a [routerLink]="['/tipp']"><md-icon>arrow_back</md-icon></a> &nbsp; {{categoryname}}</md-card-title>
     <md-card-content>
       <md-spinner class="app-spinner"></md-spinner>
     </md-card-content>
@@ -28,7 +28,7 @@
       <div class="matchbottom">{{match.matchstart}}</div>
     </md-card-content>
   </md-card>
-  <div *ngIf="categoryname" class="btn_wrapper">
+  <div *ngIf="preloadingDone" class="btn_wrapper">
     <button md-raised-button (click)="submitTipps()" class="btn_tipp" color="primary">
       <md-spinner *ngIf="loading" class="app-spinner"></md-spinner>
       <span *ngIf="!loading">Absenden</span>

@@ -25,7 +25,7 @@ export class TippComponent implements OnInit{
     this.categoriesService.getAll()
                      .subscribe(
                             matches => { this.categoriesModelAll = matches;
-                                         this.loaded = true; }, 
+                                         this.loaded = true; },
                             err =>   { console.log(err) });
   }
 
