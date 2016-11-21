@@ -1,10 +1,14 @@
+//Angular
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
 import { DomSanitizer } from '@angular/platform-browser';
-
+//Material2
+import { MdSnackBar } from '@angular/material';
+//Services
 import { MatchesService } from '../services/matches.service';
 import { TippsService } from '../services/tipps.service';
+//Models
 import { MatchesModel } from '../models/matches';
 import { TippsModel } from '../models/tipps';
 
@@ -12,7 +16,7 @@ import { TippsModel } from '../models/tipps';
   selector: 'Tipper',
   templateUrl: './tipper.component.html',
   styleUrls: ['./tipper.component.css'],
-  providers: []
+  providers: [MdSnackBar]
 })
 export class TipperComponent implements OnInit{
 
@@ -21,6 +25,7 @@ export class TipperComponent implements OnInit{
     private route: ActivatedRoute,
     private matchesservice: MatchesService,
     private tippsservice: TippsService,
+    private snackBar: MdSnackBar,
     private _DomSanitizationService: DomSanitizer,
   ){}
 
@@ -91,12 +96,18 @@ export class TipperComponent implements OnInit{
   }
 
   submitTipps(): void {
+    this.loading = true;
     for(let i=0;i<this.tippsmodelview.length;i++){
       // Update Tipps
       this.tippsservice.change(this.tippsmodelview[i])
                         .subscribe(
-                          tipps => { this.tippsmodelview[i]['_etag'] = tipps['_etag']; },
-                          err   => { });
+                          tipps => {  if(this.tippsmodelview.length-1 == i){
+                                        this.loading = false;
+                                        this.snackBar.open('Deine Tipps wurden geändert', 'Close');
+                                      }
+                                      this.tippsmodelview[i]['_etag'] = tipps['_etag']; },
+                          err   => {  this.loading = false; 
+                                      this.snackBar.open(err, 'Close'); });
     };
   }
 

@@ -68,4 +68,8 @@ export class AdminMembersComponent implements OnInit{
                               err           => { console.log(err) });
   }
 
+  setnewPassword(index: number): void {
+
+  }
+
 }
