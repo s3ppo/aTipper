@@ -34,8 +34,14 @@
     <md-card-title>Matches verwalten</md-card-title>
     <md-card-content>
         <md-nav-list>
-            <md-list-item *ngFor="let matchview of matchesmodelview">
-                <h3 md-subheader>{{matchview.team1.teamname}} - {{matchview.team2.teamname}}</h3>
+            <md-list-item class="md2 md-list-item md-2-line" *ngFor="let matchview of matchesmodelview">
+                <div class="md-list-text">
+                    <h3 md-line>{{matchview.team1.teamname}} - {{matchview.team2.teamname}}</h3>
+                    <p md-line>{{matchview.matchlocation}}</p>
+                </div>
+                <button md-icon-button (click)="setResult(matchview)">
+                    <md-icon svgSrc="/assets/whistle.svg"></md-icon>
+                </button>
                 <button md-icon-button (click)="delMatch(matchview)">
                     <md-icon>delete</md-icon>
                 </button>

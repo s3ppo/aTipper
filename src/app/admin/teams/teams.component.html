@@ -19,7 +19,7 @@
         <md-nav-list>
             <md-list-item *ngFor="let teamview of teamsmodelview">
                 <img md-list-avatar [src]="_DomSanitizationService.bypassSecurityTrustUrl('data:image/jpeg;base64,'+teamview.flag)" />
-                <h3 md-subheader>{{teamview.teamname}}</h3>
+                <div class="md-list-text">{{teamview.teamname}}</div>
                 <button md-icon-button (click)="delTeam(teamview)">
                     <md-icon>delete</md-icon>
                 </button>

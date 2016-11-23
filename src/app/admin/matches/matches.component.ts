@@ -82,6 +82,10 @@ export class AdminMatchesComponent implements OnInit{
                                          this.matches_msg[1] = 'Match konnte nicht gelöscht werden.'; });
   }
 
+  setResult(match): void {
+    
+  }
+
   getAllCategories(): void {
     this.categoriesService.getAll()
                   .subscribe(

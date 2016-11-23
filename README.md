@@ -3,7 +3,7 @@
 
 aTipper is a Tippgame based on Angular2
 
-you can see a running demo on http://www.moniholz.aTipper
+you can see a running demo on http://www.moniholz.at
 
 username: demo
 

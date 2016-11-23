@@ -64,4 +64,18 @@ export class MatchesService {
                     .catch((error:any) => Observable.throw(error.json()._error.message || 'Server error'));
   }
 
+    // Change a Tipp
+  change(object: Object): Observable<MatchesModel> {
+    let chgUrl = this.MatchesUrl + '/' + object['_id'];
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    headers.append('Authorization', this.auth);
+    headers.append('If-Match', object['_etag']);
+    let options = new RequestOptions({ headers: headers });
+    let body = '{'+'"result1":"'+object['result1']+'","result2":"'+object['result2']+'"}';
+
+    return this.http.patch(chgUrl, body, options)
+                    .map((res:Response) => res.json())
+                    .catch((error:any) => Observable.throw(error.json()._error.message || 'Server error'));
+  }
+
 }
